@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReservasCanchas.Views.CanchasView"
+             xmlns:model="clr-namespace:ReservasCanchas.Models"
+             xmlns:viewmodel="clr-namespace:ReservasCanchas.ViewModels"
+             x:DataType="viewmodel:CanchasViewModel"
+             Title="{Binding Title}">
+
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto" RowSpacing="0">
+
+        <CollectionView 
+                        Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Canchas}"
+                        SelectionMode="None"
+                        
+                        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Cancha">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125">
+                            <Grid Padding="0" ColumnDefinitions="120, *">
+                                <Image Aspect="AspectFill"
+                                   WidthRequest="120"
+                                   HeightRequest="120"
+                                   
+                                   />
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Padding="10"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding Nombre}"/>
+                                    <Label Text="{Binding Descripcion}"/>
+                                    <Label Text="{Binding Disponibilidad}"/>
+                                
+
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Traer Canchas"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1"
+                Command="{Binding getCanchasCommand}"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                />
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.Row="2"
+                           Grid.ColumnSpan="2"/>
+
+
+    </Grid>
+</ContentPage>
