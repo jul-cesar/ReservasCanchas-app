@@ -27,6 +27,8 @@ namespace ReservasCanchas
             builder.Services.AddSingleton<CanchasService>();
             builder.Services.AddSingleton<CanchasViewModel>();
             builder.Services.AddSingleton(Connectivity.Current);
+            builder.Services.AddSingleton<ReservasService>();
+
             builder.Services.AddTransient<CanchaDetailsViewModel>();
 
             builder.Services.AddSingleton<CanchasView>();

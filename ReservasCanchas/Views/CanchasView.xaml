@@ -92,9 +92,16 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+          
         </RefreshView>
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                 IsRunning="{Binding IsBusy}"
+                 HorizontalOptions="Fill"
+                 VerticalOptions="Center"
+                 Color="{StaticResource Primary}"
+                 Grid.RowSpan="2"
+                 Grid.ColumnSpan="2"/>
 
-       
 
     </Grid>
 </ContentPage>

@@ -47,16 +47,17 @@
                     <Label Text="{Binding Cancha.TipoSuperficie}" TextColor="#f1f1f1"/>
                     <Label Text="{Binding Cancha.Descripcion}" TextColor="#f1f1f1"/>
                     <Label Text="{Binding Cancha.Disponibilidad}" TextColor="#f1f1f1"/>
-                    
-                  
-            <Button Text="Reservar"
-                    TextColor="White"
-                    BackgroundColor="#3d432a"
-                    Clicked="Button_Clicked"
-                    CornerRadius="20"
-                    WidthRequest="150"
-                    HeightRequest="50"
-                    Margin="0,0,0,20"/>
+            
+                    <Button Text="Reservar"
+                     TextColor="White"
+                     BackgroundColor="#3d432a"
+                  Command="{Binding OpenDetailPopupCommand}"
+                      CornerRadius="20"
+                     WidthRequest="150"
+                     HeightRequest="50"
+                     Margin="0,0,0,20" />
+              
+
             <Button Text="Cancelar"
                     TextColor="White"
                     BackgroundColor="#3d432a"

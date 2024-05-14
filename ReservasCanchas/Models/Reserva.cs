@@ -4,17 +4,18 @@
     {
 
 
-
-
         public int IDUsuario { get; set; }
         public int IDCancha { get; set; }
-        public DateTime HoraInicio { get; set; }
+        public string FechaInicio { get; set; }
+        public string HoraInicio { get; set; }
         public int Duracion { get; set; }
-        public int MontoPagadl { get; set; }
         public string Estado { get; set; }
-        public int MontoPagado { get; set; }
         public string MetodoPago { get; set; }
+        public string EstadoPago { get; set; }
+        public float MontoPagado { get; set; }
         public int[] suministrosadicionales { get; set; }
+
+
 
 
 

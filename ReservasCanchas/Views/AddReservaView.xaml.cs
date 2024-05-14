@@ -1,15 +1,15 @@
 using CommunityToolkit.Maui.Views;
-using ReservasCanchas.Models;
+using ReservasCanchas.ViewModels;
 
 namespace ReservasCanchas.Views;
 
 public partial class AddReservaView : Popup
 {
-    Cancha canchaReserva;
-    public AddReservaView(Cancha cancha)
+
+    public AddReservaView(ReservaViewModel viewModel)
     {
         InitializeComponent();
-        this.canchaReserva = cancha;
-        this.BindingContext = cancha;
+        BindingContext = viewModel;
+
     }
 }

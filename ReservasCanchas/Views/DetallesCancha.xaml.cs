@@ -1,6 +1,4 @@
-using CommunityToolkit.Maui.Views;
 using ReservasCanchas.ViewModels;
-using ReservasCanchas.Views;
 
 namespace ReservasCanchas;
 
@@ -19,15 +17,5 @@ public partial class DetallesCancha : ContentPage
         base.OnNavigatedTo(args);
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
 
-        if (BindingContext is CanchaDetailsViewModel viewModel)
-        {
-
-            await this.ShowPopupAsync(new AddReservaView(viewModel.Cancha));
-        }
-
-
-    }
 }

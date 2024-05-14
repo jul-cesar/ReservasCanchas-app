@@ -8,14 +8,8 @@ public partial class CanchasView : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+        viewModel.getCanchasCommand.Execute(null);
+
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        if (BindingContext is CanchasViewModel viewModel)
-        {
-            viewModel.getCanchasCommand.Execute(null);
-        }
-    }
 }

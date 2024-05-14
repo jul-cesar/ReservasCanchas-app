@@ -3,21 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
            xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+           x:DataType="viewmodel:ReservaViewModel"
+           xmlns:viewmodel="clr-namespace:ReservasCanchas.ViewModels"
+          
              x:Class="ReservasCanchas.Views.AddReservaView"
-           Size="340,400"
+           Size="340,700"
            
            
             >
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20" Padding="10">
-        <Label Text="{Binding Nombre, StringFormat='Reservar la cancha {0}'}" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="10"/>
+        <Label Text="{Binding CanchaSeleccionada.Nombre, StringFormat='Reservar la cancha {0}'}" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="10"/>
         <material:InputField Title="Hora de la reserva" HasValue="True">
-            <TimePicker BackgroundColor="Transparent" />
+            <TimePicker BackgroundColor="Transparent" Time="{Binding HoraInicio}"/>
         </material:InputField>
 
-        <material:TextField Title="Monto a pagar" Keyboard="Numeric"/>
+        <material:PickerField 
+            SelectedItem="{Binding MetodoPago}"
+    Title="Metodo de pago"
+    ItemsSource="{Binding Items}"
+    
+    />
+
+      
+
+        <material:TextField Title="Monto a pagar" Keyboard="Numeric" Text="{Binding MontoPagado}" />
+        <material:TextField Title="Duracion" Keyboard="Numeric" Text="{Binding Duracion}" />
 
         <material:DatePickerField Title="Fecha de la reserva"   />
-        <Button StyleClass="FilledButton" Text="Reservar"  BackgroundColor="#3d432a"/>
+        <Button StyleClass="FilledButton" Text="Reservar"  BackgroundColor="#3d432a" Command="{Binding createReservaCommand}"/>
 
 
     </StackLayout>
