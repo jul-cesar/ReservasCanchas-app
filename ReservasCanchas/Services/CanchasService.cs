@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+﻿using System.Text.Json;
 using ReservasCanchas.Models;
 
 namespace ReservasCanchas.Services
@@ -19,15 +19,13 @@ namespace ReservasCanchas.Services
 
         public async Task<List<Cancha>> getCanchas()
         {
-            if (canchasLista.Count > 0)
-            {
-                return canchasLista;
-            }
 
             var response = await httpClient.GetAsync($"{URL}/cancha");
             if (response.IsSuccessStatusCode)
             {
-                canchasLista = await response.Content.ReadFromJsonAsync<List<Cancha>>();
+                var productData = await response.Content.ReadAsStringAsync();
+                canchasLista = JsonSerializer.Deserialize<List<Cancha>>(productData);
+
             }
 
             return canchasLista;

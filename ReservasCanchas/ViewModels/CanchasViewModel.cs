@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ReservasCanchas.Models;
 using ReservasCanchas.Services;
@@ -10,13 +11,37 @@ namespace ReservasCanchas.ViewModels
 
     {
         CanchasService canchasService;
+        IConnectivity connectivity;
         public ObservableCollection<Cancha> Canchas { get; } = new();
-        public CanchasViewModel(CanchasService canchasService)
+        public CanchasViewModel(CanchasService canchasService, IConnectivity connectivity)
         {
             Title = "Lista canchas";
             this.canchasService = canchasService;
+            this.connectivity = connectivity;
 
         }
+        [ObservableProperty]
+        bool isRefreshing;
+
+        [RelayCommand]
+        async Task GoToDetailsAsync(Cancha cancha)
+        {
+            if (cancha is null)
+            {
+                return;
+            }
+            try
+            {
+                await Shell.Current.GoToAsync($"{nameof(DetallesCancha)}", true, new Dictionary<string, object> { { "Cancha", cancha } });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Navigation failed: {ex.Message}");
+            }
+
+        }
+
+
         [RelayCommand]
         async Task getCanchasAsync()
         {
@@ -26,7 +51,16 @@ namespace ReservasCanchas.ViewModels
             }
             try
             {
-                IsBusy = true;
+                if (connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+
+                    await Shell.Current.DisplayAlert("Internet error", "Revisa tu conexion a internet e intentalo de nuevo", "ok");
+                }
+                if (!IsRefreshing)
+                {
+                    IsBusy = true;
+                }
+
                 var canchas = await canchasService.getCanchas();
 
                 if (Canchas.Count != 0)
@@ -45,7 +79,9 @@ namespace ReservasCanchas.ViewModels
             }
             finally
             {
+
                 IsBusy = false;
+                IsRefreshing = false;
             }
 
         }

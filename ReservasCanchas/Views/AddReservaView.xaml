@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+           xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             x:Class="ReservasCanchas.Views.AddReservaView"
+           Size="340,400"
+           
+           
+            >
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20" Padding="10">
+        <Label Text="{Binding Nombre, StringFormat='Reservar la cancha {0}'}" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="10"/>
+        <material:InputField Title="Hora de la reserva" HasValue="True">
+            <TimePicker BackgroundColor="Transparent" />
+        </material:InputField>
+
+        <material:TextField Title="Monto a pagar" Keyboard="Numeric"/>
+
+        <material:DatePickerField Title="Fecha de la reserva"   />
+        <Button StyleClass="FilledButton" Text="Reservar"  BackgroundColor="#3d432a"/>
+
+
+    </StackLayout>
+</mct:Popup>

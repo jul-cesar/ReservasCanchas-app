@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReservasCanchas.DetallesCancha"
+             xmlns:viewmodel="clr-namespace:ReservasCanchas.ViewModels"
+             x:DataType="viewmodel:CanchaDetailsViewModel"
+             BackgroundColor="#191919"
+             Shell.PresentationMode="ModalAnimated"
+             Title="{Binding Cancha.Nombre}">
+
+
+ 
+        <ScrollView >
+            <VerticalStackLayout>
+           
+                <Grid ColumnDefinitions="*,Auto,*"
+                      RowDefinitions="160, Auto, Auto">
+                    <BoxView  Grid.ColumnSpan="3"
+                             HeightRequest="160"
+                             HorizontalOptions="FillAndExpand">
+                        <BoxView.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#3d432a" Offset="0.1" />
+                                <GradientStop Color="#222021" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </BoxView.Background>
+                    </BoxView>
+
+                    <Frame Grid.RowSpan="2" Grid.Column="1" HeightRequest="160"
+                           WidthRequest="160"
+                           CornerRadius="80"
+                           HorizontalOptions="Center"
+                           IsClippedToBounds="True"
+                           Padding="0"
+                           Margin="0,80,0,0">
+                        <Image Aspect="Fill" HeightRequest="160"
+                               WidthRequest="160"
+                               HorizontalOptions="Center"
+                               Source="{Binding Cancha.ImgURL}"
+                               VerticalOptions="Center"/>
+                    </Frame>
+                </Grid>
+                <VerticalStackLayout Padding="20" Spacing="15">
+                
+                    <Label Text="{Binding Cancha.Nombre}" TextColor="#f1f1f1"/>
+                    <Label Text="{Binding Cancha.Precio}" TextColor="#f1f1f1"/>
+                    <Label Text="{Binding Cancha.TipoSuperficie}" TextColor="#f1f1f1"/>
+                    <Label Text="{Binding Cancha.Descripcion}" TextColor="#f1f1f1"/>
+                    <Label Text="{Binding Cancha.Disponibilidad}" TextColor="#f1f1f1"/>
+                    
+                  
+            <Button Text="Reservar"
+                    TextColor="White"
+                    BackgroundColor="#3d432a"
+                    Clicked="Button_Clicked"
+                    CornerRadius="20"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    Margin="0,0,0,20"/>
+            <Button Text="Cancelar"
+                    TextColor="White"
+                    BackgroundColor="#3d432a"
+                    CornerRadius="20"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    Margin="0,0,0,20"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+     
+        
+        
+</ContentPage>
