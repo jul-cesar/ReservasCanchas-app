@@ -6,7 +6,10 @@
 
         public int IDUsuario { get; set; }
         public int IDCancha { get; set; }
-        public string FechaInicio { get; set; }
+        public DateTime FechaCreacion { get; set; }
+
+        public DateTime FechaReserva { get; set; }
+
         public string HoraInicio { get; set; }
         public int Duracion { get; set; }
         public string Estado { get; set; }

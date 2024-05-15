@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Text;
+using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ReservasCanchas.Models;
@@ -22,20 +24,28 @@ namespace ReservasCanchas.ViewModels
         [ObservableProperty]
         private string[] items = new string[]
    {
-        "Tarjeta de Crédito",
-        "Tarjeta de Débito",
-        "Transferencia Bancaria",
+        "TarjetaDeCrédito",
+        "TarjetaDeDebito",
+        "TransferenciaBancaria",
         "Efectivo"
    };
+        [ObservableProperty]
+        public DateTime dateToday = DateTime.Today;
+
+        [ObservableProperty]
+
+        public DateTime dateTodayPlusThreeMonths = DateTime.Now.AddMonths(3);
+
 
         [ObservableProperty]
         public int iDUsuario;
+
         [ObservableProperty]
-        public int iDCancha;
+        public DateTime fechaInicio;
         [ObservableProperty]
-        public string fechaInicio;
+        public TimeSpan horaInicio;
         [ObservableProperty]
-        public string horaInicio;
+        private TimeSpan horaInicioTimeSpan;
         [ObservableProperty]
         public int duracion;
         [ObservableProperty]
@@ -47,33 +57,61 @@ namespace ReservasCanchas.ViewModels
         [ObservableProperty]
         public float montoPagado;
         [ObservableProperty]
-        public int[] suministrosadicionales;
+        public int[] suministrosAdicionales;
+
+        public string FechaInicioString => FechaInicio.ToString("dd/MM/yyyy");
+
 
         [RelayCommand]
         async Task createReservaAsync()
         {
+
+
             try
             {
-                await serviceReservas.crearReserva(new Models.Reserva
+                var reserva = new Reserva
                 {
-                    Duracion = this.Duracion,
-                    Estado = this.Estado,
-                    EstadoPago = this.EstadoPago,
-                    FechaInicio = this.FechaInicio,
-                    HoraInicio = this.HoraInicio,
-                    IDCancha = this.IDCancha,
-                    IDUsuario = this.IDUsuario,
-                    MetodoPago = this.MetodoPago,
-                    MontoPagado = this.MontoPagado,
-                    suministrosadicionales = this.Suministrosadicionales
+                    IDUsuario = 1,
+                    Duracion = 120,
+                    Estado = "Confirmada",
+                    EstadoPago = "Pagado",
+                    FechaReserva = FechaInicio,
+                    HoraInicio = HoraInicio.ToString(),
+                    IDCancha = CanchaSeleccionada.IDCancha,
+                    MetodoPago = MetodoPago,
+                    MontoPagado = MontoPagado,
+                    suministrosadicionales = SuministrosAdicionales ?? new int[] { }
+                };
+
+                var reservaJson = JsonSerializer.Serialize(new
+                {
+                    reserva.IDUsuario,
+                    reserva.Duracion,
+                    reserva.Estado,
+                    reserva.EstadoPago,
+                    FechaReserva = reserva.FechaReserva.ToString("o"), // ISO 8601 format
+                    reserva.HoraInicio,
+                    reserva.IDCancha,
+                    reserva.MetodoPago,
+                    reserva.MontoPagado,
+                    reserva.suministrosadicionales
                 });
+
+                // Log the JSON being sent
+                Console.WriteLine("JSON enviado:");
+                Console.WriteLine(reservaJson);
+
+                // Send the JSON to the service
+                var content = new StringContent(reservaJson, Encoding.UTF8, "application/json");
+                await serviceReservas.CrearReserva(content);
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error", "Error trayendo las canchas", "ok");
+                await Shell.Current.DisplayAlert("Error", "Error trayendo las canchas", "OK");
             }
+
         }
     }
 }

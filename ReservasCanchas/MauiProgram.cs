@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Mopups.Hosting;
 using ReservasCanchas.Services;
 using ReservasCanchas.ViewModels;
 using ReservasCanchas.Views;
@@ -17,6 +18,8 @@ namespace ReservasCanchas
                 .UseMauiCommunityToolkit()
                 .UseUraniumUI()
                 .UseUraniumUIMaterial()
+                    .ConfigureMopups()
+
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -28,6 +31,8 @@ namespace ReservasCanchas
             builder.Services.AddSingleton<CanchasViewModel>();
             builder.Services.AddSingleton(Connectivity.Current);
             builder.Services.AddSingleton<ReservasService>();
+            builder.Services.AddCommunityToolkitDialogs();
+            builder.Services.AddMopupsDialogs();
 
             builder.Services.AddTransient<CanchaDetailsViewModel>();
 

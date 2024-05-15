@@ -1,26 +1,41 @@
-﻿using System.Text;
-using System.Text.Json;
-using ReservasCanchas.Models;
-
-namespace ReservasCanchas.Services
+﻿namespace ReservasCanchas.Services
 {
     public class ReservasService
     {
-        HttpClient httpClient { get; set; }
-        string URL = "https://reservas-canchas.onrender.com/reserva";
+        private readonly HttpClient httpClient;
 
-        public async Task crearReserva(Reserva reserva)
+        public ReservasService()
         {
-            var jsonReserva = JsonSerializer.Serialize(reserva);
-            var content = new StringContent(jsonReserva, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync($"{URL}/cancha", content);
-            if (response.IsSuccessStatusCode)
-            {
-
-                await Shell.Current.DisplayAlert("Exito", "Reserva hecha con exito", "ok");
-            }
-
+            httpClient = new HttpClient();
         }
 
+        private const string URL = "https://reservas-canchas.onrender.com/reserva";
+
+        public async Task CrearReserva(HttpContent content)
+        {
+            try
+            {
+
+                var response = await httpClient.PostAsync(URL, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await Shell.Current.DisplayAlert("Éxito", "Reserva hecha con éxito", "OK");
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    await Shell.Current.DisplayAlert("Error", $"Error al realizar la reserva: {response.StatusCode}. Mensaje: {errorMessage}", "OK");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Error de red: {ex.Message}", "OK");
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Error inesperado: {ex.Message}", "OK");
+            }
+        }
     }
 }
