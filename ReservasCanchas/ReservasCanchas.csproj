@@ -57,11 +57,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\calendar.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.21" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Plugin.Maui.Calendar" Version="1.1.6" />
 		<PackageReference Include="UraniumUI" Version="2.8.1" />
 		<PackageReference Include="UraniumUI.Dialogs.CommunityToolkit" Version="2.8.0" />
 		<PackageReference Include="UraniumUI.Dialogs.Mopups" Version="2.8.1" />
@@ -70,6 +75,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\CalendarReservas.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\DetallesCancha.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

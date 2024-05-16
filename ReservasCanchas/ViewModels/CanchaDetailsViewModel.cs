@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ReservasCanchas.Models;
@@ -28,18 +27,18 @@ namespace ReservasCanchas.ViewModels
 
 
         [RelayCommand]
-        private async Task OpenDetailPopup()
+        private async Task OpenDetailPopup(Cancha cancha)
         {
             Debug.WriteLine("work");
 
-            if (cancha != null)
-            {
-                var detailPopup = new AddReservaView(new ReservaViewModel(serviceReservas, Cancha));
-                await Application.Current.MainPage.ShowPopupAsync(detailPopup);
-            }
+
+            await Shell.Current.GoToAsync($"{nameof(AddReservaView)}", true, new Dictionary<string, object> { { "Cancha", cancha } });
+
         }
 
 
     }
 
 }
+
+

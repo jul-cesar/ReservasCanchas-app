@@ -1,27 +1,33 @@
-using CommunityToolkit.Maui.Views;
 using ReservasCanchas.ViewModels;
-using UraniumUI.Dialogs;
 
 namespace ReservasCanchas.Views;
 
-public partial class AddReservaView : Popup
+public partial class AddReservaView : ContentPage
 {
-    public IDialogService DialogService { get; }
+    private readonly ReservaViewModel _viewModel;
 
-    public AddReservaView(ReservaViewModel viewModel, IDialogService dialogService)
+    public AddReservaView(ReservaViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
-        DialogService = dialogService;
-
+        _viewModel = viewModel;
 
 
 
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        await DialogService.DisplayCheckBoxPromptAsync("Title", new[] { "Option 1", "Option 2", "Option 3" });
+        base.OnNavigatedTo(args);
 
     }
+
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        await _viewModel.GetSuministrosAsync();
+    }
+
+
+
 }

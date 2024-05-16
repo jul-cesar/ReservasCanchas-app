@@ -23,7 +23,11 @@
             <ShellContent Title="Reservas"
             Icon="note-sticky-regular.svg"
             ContentTemplate="{DataTemplate local:ReservasView}"
-        Route="ReservasPage"/>
+        Route="ReservaView"/>
+
+        <ShellContent Title="Calendario"
+    ContentTemplate="{DataTemplate local:CalendarReservas}"
+Route="CalendarReservas"/>
 
     </TabBar>
 

@@ -1,4 +1,6 @@
-﻿namespace ReservasCanchas
+﻿using ReservasCanchas.Views;
+
+namespace ReservasCanchas
 {
     public partial class AppShell : Shell
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(DetallesCancha), typeof(DetallesCancha));
-
+            Routing.RegisterRoute(nameof(AddReservaView), typeof(AddReservaView));
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ReservasCanchas.Services
     {
         HttpClient httpClient { get; set; }
 
-        string URL = "https://reservas-canchas.onrender.com";
+        string URL = "https://reserva-canchas.vercel.app";
 
         List<Cancha> canchasLista = new();
 

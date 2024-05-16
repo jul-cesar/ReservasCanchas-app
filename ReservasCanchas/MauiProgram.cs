@@ -30,7 +30,7 @@ namespace ReservasCanchas
             builder.Services.AddSingleton<CanchasService>();
             builder.Services.AddSingleton<CanchasViewModel>();
             builder.Services.AddSingleton(Connectivity.Current);
-            builder.Services.AddSingleton<ReservasService>();
+            builder.Services.AddTransient<ReservasService>();
             builder.Services.AddCommunityToolkitDialogs();
             builder.Services.AddMopupsDialogs();
 
@@ -40,7 +40,7 @@ namespace ReservasCanchas
             builder.Services.AddTransient<ReservaViewModel>();
 
             builder.Services.AddTransient<DetallesCancha>();
-            builder.Services.AddSingleton<AddReservaView>();
+            builder.Services.AddTransient<AddReservaView>();
 
 
 
