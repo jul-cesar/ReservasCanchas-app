@@ -9,6 +9,8 @@ namespace ReservasCanchas
             InitializeComponent();
             Routing.RegisterRoute(nameof(DetallesCancha), typeof(DetallesCancha));
             Routing.RegisterRoute(nameof(AddReservaView), typeof(AddReservaView));
+            Routing.RegisterRoute(nameof(ReservasCancha), typeof(ReservasCancha));
+
         }
     }
 }

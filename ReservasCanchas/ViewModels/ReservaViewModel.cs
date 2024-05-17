@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -12,36 +13,38 @@ namespace ReservasCanchas.ViewModels
 
     public partial class ReservaViewModel : ObservableObject
     {
-        ReservasService serviceReservas;
+        private readonly ReservasService serviceReservas;
 
         public ReservaViewModel(ReservasService service)
         {
-            this.serviceReservas = service;
-            Suministros = new List<string>();
+            serviceReservas = service;
+            Suministros = new ObservableCollection<Suministro>();
+            SelectedSupplements = new ObservableCollection<Suministro>();
 
+            // Load the data when the ViewModel is initialized
+            GetSuministrosAsync();
         }
 
-
-
         [ObservableProperty]
-        Cancha cancha;
+        private Cancha cancha;
 
         [ObservableProperty]
         private string[] items = new string[]
         {
-            "TarjetaDeCrédito",
-            "TarjetaDeDebito",
-            "TransferenciaBancaria",
-            "Efectivo"
+        "TarjetaDeCrédito",
+        "TarjetaDeDebito",
+        "TransferenciaBancaria",
+        "Efectivo"
         };
 
         [ObservableProperty]
         public DateTime dateToday = DateTime.Today;
+
         [ObservableProperty]
-        public List<string> suministros;
-        public List<Suministro> suministrosObjs;
+        public ObservableCollection<Suministro> suministros;
 
-
+        [ObservableProperty]
+        public ObservableCollection<Suministro> selectedSupplements;
 
         [ObservableProperty]
         public DateTime dateTodayPlusThreeMonths = DateTime.Now.AddMonths(3);
@@ -50,34 +53,32 @@ namespace ReservasCanchas.ViewModels
         public int iDUsuario;
 
         [ObservableProperty]
-
-
         public DateTime fechaInicio;
+
         [ObservableProperty]
         public TimeSpan horaInicio;
-        [ObservableProperty]
-        private TimeSpan horaInicioTimeSpan;
-        [ObservableProperty]
-        public int duracion;
-        [ObservableProperty]
-        public string estado;
-        [ObservableProperty]
-        public string metodoPago;
-        [ObservableProperty]
-        public string estadoPago;
-        [ObservableProperty]
-        public float montoPagado;
-        [ObservableProperty]
-        public int[] suministrosAdicionales;
 
         [ObservableProperty]
-        public string[] sums;
+        public int duracion;
+
+        [ObservableProperty]
+        public string estado;
+
+        [ObservableProperty]
+        public string metodoPago;
+
+        [ObservableProperty]
+        public string estadoPago;
+
+        [ObservableProperty]
+        public float montoPagado;
 
         [ObservableProperty]
         public TimeSpan horaFinalizacion;
 
-
         public string FechaInicioString => FechaInicio.ToString("dd/MM/yyyy");
+
+
 
         public async Task GetSuministrosAsync()
         {
@@ -90,14 +91,7 @@ namespace ReservasCanchas.ViewModels
                     Debug.WriteLine("La lista de suministros es nula");
                     return;
                 }
-                suministrosObjs = suministrosList;
-
-                foreach (var sum in suministrosList)
-                {
-                    Suministros.Add(sum.TipoSuministro);
-                }
-
-
+                Suministros = new ObservableCollection<Suministro>(suministrosList);
             }
             catch (Exception ex)
             {
@@ -107,14 +101,15 @@ namespace ReservasCanchas.ViewModels
         }
 
         [RelayCommand]
-        async Task createReservaAsync()
+        public async Task CreateReservaAsync()
         {
+            var selectedIds = SelectedSupplements
+                   .Select(s => s.IDSuministro)
 
+                   .ToArray();
             try
             {
-
                 string fechaReservaIso = FechaInicio.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
-
 
                 var horaFinal = HoraInicio.Add(TimeSpan.FromMinutes(Duracion)).ToString(@"hh\:mm\:ss");
 
@@ -130,7 +125,7 @@ namespace ReservasCanchas.ViewModels
                     IDCancha = Cancha.IDCancha,
                     MetodoPago = MetodoPago,
                     MontoPagado = MontoPagado,
-                    suministrosadicionales = SuministrosAdicionales
+                    suministrosadicionales = selectedIds
                 };
 
                 var reservaJson = JsonSerializer.Serialize(new
@@ -140,14 +135,13 @@ namespace ReservasCanchas.ViewModels
                     reserva.Estado,
                     reserva.EstadoPago,
                     FechaReserva = fechaReservaIso,
-                    HoraInicio = reserva.HoraInicio,
-                    HoraFinalizacion = reserva.HoraFinalizacion,
+                    reserva.HoraInicio,
+                    reserva.HoraFinalizacion,
                     reserva.IDCancha,
                     reserva.MetodoPago,
                     reserva.MontoPagado,
                     reserva.suministrosadicionales
                 });
-
 
                 Console.WriteLine("JSON enviado:");
                 Console.WriteLine(reservaJson);
@@ -155,9 +149,6 @@ namespace ReservasCanchas.ViewModels
                 // Send the JSON to the service
                 var content = new StringContent(reservaJson, Encoding.UTF8, "application/json");
                 await serviceReservas.CrearReserva(content);
-
-
-
             }
             catch (Exception ex)
             {
@@ -166,4 +157,5 @@ namespace ReservasCanchas.ViewModels
             }
         }
     }
+
 }

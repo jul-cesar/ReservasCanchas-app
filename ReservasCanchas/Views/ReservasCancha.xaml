@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReservasCanchas.Views.ReservasCancha"
+            
+             xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
+            
+             Title="ReservasCancha">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#3d432a" Offset="0.1" />
+            <GradientStop Color="#222021" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <StackLayout HorizontalOptions="Center">
+        <Label Text="{Binding currentCancha.Nombre, StringFormat='Horarios de reservas para {0}'}" TextColor="#f1f1f1" HorizontalTextAlignment="Center" Margin="10,20,10,0" FontSize="Caption"/>
+        <cal:Calendar Events="{Binding Events}" Padding="10" SelectedDateColor="Green" ArrowsColor="black" EventsScrollViewVisible="True"
+               Culture="{Binding Culture}" HorizontalOptions="CenterAndExpand" DaysTitleColor="#f1f1f1" 
+               DaysTitleWeekendColor="#f1f1f1" ArrowsBorderColor="Black"
+               YearLabelColor="#f1f1f1" MonthLabelColor="#f1f1f1" DeselectedDayTextColor="#f1f1f1" 
+               SelectedDayTextColor="#f1f1f1" TodayFillColor="BurlyWood" SelectedDayBackgroundColor="Green"
+               ShowYearPicker="False">
+            <cal:Calendar.EmptyTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="Aun no hay reservas para este dia" HorizontalTextAlignment="Center" TextColor="#f1f1f1" Margin="0,5,0,5" />
+                    </StackLayout>
+                </DataTemplate>
+            </cal:Calendar.EmptyTemplate>
+            <cal:Calendar.EventTemplate>
+                <DataTemplate>
+                    <StackLayout
+             Padding="15">
+                        <Label
+                 Text="{Binding Name}"
+                 FontAttributes="Bold"
+                     TextColor="CadetBlue"
+                 FontSize="Medium" />
+                        <Label
+                 Text="{Binding Description}"
+                     TextColor="#f1f1f1"
+                 FontSize="Small"
+                 LineBreakMode="WordWrap" />
+                    </StackLayout>
+                </DataTemplate>
+            </cal:Calendar.EventTemplate>
+        </cal:Calendar>
+    </StackLayout>
+</ContentPage>

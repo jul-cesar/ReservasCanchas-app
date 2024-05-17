@@ -57,7 +57,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\appointment.png" />
 	  <None Remove="Resources\Images\calendar.jpg" />
+	  <None Remove="Resources\Images\footballfield.png" />
+	  <None Remove="Resources\Images\notification.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,7 +87,16 @@
 	  <MauiXaml Update="Views\CanchasView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Notificaciones.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReservasCancha.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ReservasView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\UserFacturas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

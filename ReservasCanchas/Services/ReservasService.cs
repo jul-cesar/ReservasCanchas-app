@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using CommunityToolkit.Maui.Alerts;
 using ReservasCanchas.Models;
 
@@ -8,6 +9,7 @@ namespace ReservasCanchas.Services
     {
         private readonly HttpClient httpClient;
         List<Suministro> suministrosLista = new();
+        List<ReservasResponse> reservasLista = new();
 
         public ReservasService()
         {
@@ -37,11 +39,14 @@ namespace ReservasCanchas.Services
         }
 
 
+
+
+
         public async Task CrearReserva(HttpContent content)
         {
             try
             {
-
+                Debug.WriteLine(content);
                 var response = await httpClient.PostAsync(URL, content);
 
                 if (response.IsSuccessStatusCode)

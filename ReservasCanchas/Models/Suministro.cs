@@ -11,6 +11,11 @@
         public int Cantidad { get; set; }
         public string CostoUnitario { get; set; }
 
-
+        public override string ToString()
+        {
+            return TipoSuministro;
+        }
     }
+
+
 }

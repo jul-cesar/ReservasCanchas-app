@@ -36,6 +36,13 @@ namespace ReservasCanchas.ViewModels
 
         }
 
+        [RelayCommand]
+        private async Task goToReservasCancha(Cancha cancha)
+        {
+            await Shell.Current.GoToAsync($"{nameof(ReservasCancha)}", true, new Dictionary<string, object> { { "Cancha", cancha } });
+
+        }
+
 
     }
 

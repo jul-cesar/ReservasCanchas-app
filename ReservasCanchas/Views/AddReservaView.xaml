@@ -9,7 +9,7 @@
            Shell.PresentationMode="ModalAnimated"
           >
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20" Padding="4">
-        <Label Text="{Binding Sums, StringFormat='Reservar la cancha {0}'}" 
+        <Label Text="{Binding Cancha.Nombre, StringFormat='Reservar la cancha {0}'}" 
                HorizontalTextAlignment="Center" 
                FontAttributes="Bold" 
                Margin="10"/>
@@ -38,13 +38,13 @@
 
         <material:DatePickerField Title="Fecha de la reserva"  
                                   Date="{Binding FechaInicio, Mode=TwoWay}" MinimumDate="{Binding DateToday}" MaximumDate="{Binding DateTodayPlusThreeMonths}" />
-        <material:MultiplePickerField Title="Suministros adicionales" ItemsSource="{Binding Suministros}" SelectedItems="{Binding Sums, Mode=TwoWay}"/>
+        <material:MultiplePickerField  Title="Suministros adicionales" ItemsSource="{Binding Suministros}" SelectedItems="{Binding SelectedSupplements, Mode=TwoWay}" />
 
         
 
         <Button StyleClass="FilledButton" 
                 Text="Reservar"  
                 BackgroundColor="#3d432a" 
-                Command="{Binding createReservaCommand}"/>
+                Command="{Binding CreateReservaCommand}"/>
     </StackLayout>
 </ContentPage>

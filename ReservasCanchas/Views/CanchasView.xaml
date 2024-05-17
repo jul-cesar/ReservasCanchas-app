@@ -5,6 +5,9 @@
              xmlns:model="clr-namespace:ReservasCanchas.Models"
              xmlns:viewmodel="clr-namespace:ReservasCanchas.ViewModels"
               xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+                xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+
             Shell.NavBarIsVisible="False"
           
              x:DataType="viewmodel:CanchasViewModel"
@@ -25,18 +28,17 @@
 
     <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions=" Auto,*, *" RowSpacing="0" Padding="10">
         
-        <FlexLayout Grid.Row="0" Grid.ColumnSpan="2" >
-           
-            <SearchBar
-           Placeholder="Search here..."
-           BackgroundColor="#333333" 
-           TextColor="White"
-           PlaceholderColor="#888888"
-           CancelButtonColor="DarkGray"
-           HorizontalOptions="CenterAndExpand"
-           VerticalOptions="Center"
-           
-           Margin="10"/>
+        <FlexLayout Grid.Row="0" Grid.ColumnSpan="2" JustifyContent="Center" Direction="Column" AlignItems="Center" >
+            <Label Text="Reservas Online" FontAttributes="Bold" TextColor="#f1f1f1" Margin="10" FontSize="Large" />
+            <material:TextField
+                Margin="10"
+                AccentColor="White"
+                WidthRequest="320"
+                
+            Title="Busca una cancha"
+            Icon="{FontImageSource FontFamily=FASolid, Glyph={x:Static fa:Solid.MagnifyingGlass}}"/>
+
+
         </FlexLayout>
 
        

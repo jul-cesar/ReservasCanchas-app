@@ -41,6 +41,7 @@ namespace ReservasCanchas
 
             builder.Services.AddTransient<DetallesCancha>();
             builder.Services.AddTransient<AddReservaView>();
+            builder.Services.AddTransient<ReservasCancha>();
 
 
 

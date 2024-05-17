@@ -14,20 +14,26 @@
     Title="ReservasCanchas">
 
     <TabBar>
-        
-            <ShellContent Title="Canchas"
-                Icon="https://cdn-icons-png.flaticon.com/512/3304/3304803.png"
+
+        <ShellContent Title="Canchas"
+                Icon="footballfield.png"
                 ContentTemplate="{DataTemplate local:CanchasView}"
             Route="MainPage"/>
-    
-            <ShellContent Title="Reservas"
-            Icon="note-sticky-regular.svg"
-            ContentTemplate="{DataTemplate local:ReservasView}"
-        Route="ReservaView"/>
+
 
         <ShellContent Title="Calendario"
+                      Icon="https://cdn.icon-icons.com/icons2/3869/PNG/512/calendar_icon_243178.png"
     ContentTemplate="{DataTemplate local:CalendarReservas}"
 Route="CalendarReservas"/>
+
+        <ShellContent Title="Facturas"
+                      Icon="https://static.thenounproject.com/png/139414-200.png"
+            ContentTemplate="{DataTemplate local:UserFacturas}"
+Route="CalendarReservas"/>
+        <ShellContent Title="Notificaciones"
+    Icon="notification.png"
+    ContentTemplate="{DataTemplate local:Notificaciones}"
+Route="ReservaView"/>
 
     </TabBar>
 

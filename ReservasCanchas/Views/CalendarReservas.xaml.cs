@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 using Plugin.Maui.Calendar.Models;
 using ReservasCanchas.Models;
@@ -8,11 +9,12 @@ namespace ReservasCanchas.Views;
 public partial class CalendarReservas : ContentPage
 {
     public EventCollection Events { get; set; }
+    public CultureInfo Culture { get; set; }
 
     public CalendarReservas()
     {
         InitializeComponent();
-
+        Culture = new CultureInfo("es-CO");
         Events = new EventCollection();
         BindingContext = this;
 
@@ -72,12 +74,10 @@ public partial class CalendarReservas : ContentPage
                               $"Hora: {reserva.HoraInicio}\n" +
                               $"Hora finalizacion: {reserva.HoraFinalizacion}\n" +
 
-                              $"Estado: {reserva.Estado}\n" +
-                              $"Monto Pagado: {reserva.MontoPagado}"
+                              $"Estado: {reserva.Estado}"
             });
         }
 
-        // Notificar al calendario de los cambios
         OnPropertyChanged(nameof(Events));
     }
     public class EventModel

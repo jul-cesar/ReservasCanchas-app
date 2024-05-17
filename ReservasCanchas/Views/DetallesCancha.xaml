@@ -53,14 +53,18 @@
                      BackgroundColor="#3d432a"
 
                   Command="{Binding OpenDetailPopupCommand}"
-            CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}"
+                                        CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}"
+
                       CornerRadius="20"
                      WidthRequest="150"
                      HeightRequest="50"
                      Margin="0,0,0,20" />
               
 
-            <Button Text="Cancelar"
+            <Button Text="Ver horarios"
+                    Command="{Binding goToReservasCanchaCommand}"
+            CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}"
+
                     TextColor="White"
                     BackgroundColor="#3d432a"
                     CornerRadius="20"
