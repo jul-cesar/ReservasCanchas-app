@@ -1,4 +1,6 @@
-﻿namespace ReservasCanchas
+﻿using ReservasCanchas.Views;
+
+namespace ReservasCanchas
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new Login();
         }
     }
 }

@@ -12,6 +12,7 @@
     Shell.TabBarForegroundColor="White"
     Shell.PresentationMode="Animated"
     Title="ReservasCanchas">
+    
 
     <TabBar>
 

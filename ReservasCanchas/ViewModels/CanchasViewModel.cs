@@ -18,10 +18,15 @@ namespace ReservasCanchas.ViewModels
             Title = "Lista canchas";
             this.canchasService = canchasService;
             this.connectivity = connectivity;
+            Nombre = Preferences.Get("Nombre", string.Empty);
 
         }
         [ObservableProperty]
         bool isRefreshing;
+
+        [ObservableProperty]
+
+        string nombre;
 
         [RelayCommand]
         async Task GoToDetailsAsync(Cancha cancha)
