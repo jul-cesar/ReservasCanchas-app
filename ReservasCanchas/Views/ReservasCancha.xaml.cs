@@ -65,7 +65,7 @@ public partial class ReservasCancha : ContentPage, IQueryAttributable
 
     public async Task<List<ReservasResponse>> GetReservasCancha(int id)
     {
-        string url = $"https://reserva-canchas.vercel.app/reserva/{id}";
+        string url = $"https://reserva-canchas-three.vercel.app/reserva/{id}";
 
         try
         {

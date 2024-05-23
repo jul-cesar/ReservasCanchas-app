@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
+using ReservasCanchas.LocalDb;
 using ReservasCanchas.Services;
 using ReservasCanchas.ViewModels;
 using ReservasCanchas.Views;
@@ -35,7 +36,7 @@ namespace ReservasCanchas
             builder.Services.AddTransient<ReservasService>();
             builder.Services.AddCommunityToolkitDialogs();
             builder.Services.AddMopupsDialogs();
-
+            builder.Services.AddSingleton<LocalDbService>();
             builder.Services.AddTransient<CanchaDetailsViewModel>();
 
             builder.Services.AddTransient<CanchasView>();
@@ -45,6 +46,8 @@ namespace ReservasCanchas
 
             builder.Services.AddTransient<DetallesCancha>();
             builder.Services.AddTransient<AddReservaView>();
+            builder.Services.AddTransient<ReservasView>();
+
             builder.Services.AddTransient<ReservasCancha>();
 
 

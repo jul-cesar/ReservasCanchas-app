@@ -27,9 +27,9 @@
     ContentTemplate="{DataTemplate local:CalendarReservas}"
 Route="CalendarReservas"/>
 
-        <ShellContent Title="Facturas"
+        <ShellContent Title="Reservas"
                       Icon="https://static.thenounproject.com/png/139414-200.png"
-            ContentTemplate="{DataTemplate local:UserFacturas}"
+            ContentTemplate="{DataTemplate local:ReservasView}"
 Route="CalendarReservas"/>
         <ShellContent Title="Notificaciones"
     Icon="notification.png"

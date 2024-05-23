@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+            xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+
+
              x:Class="ReservasCanchas.Views.Login"
              Title="Login">
-    <StackLayout Padding="10">
-        <Entry x:Name="usernameEntry" Placeholder="Username" />
-        <Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True" />
-        <Button Text="Login" Clicked="OnLoginButtonClicked" />
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#3d432a" Offset="0.1" />
+            <GradientStop Color="#222021" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+        <Label Text="Reservas Online" TextColor="#f1f1f1" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextDecorations="Underline"/>
+        <Label Text="Inicia sesion" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" TextColor="#f1f1f1"/>
+        <material:TextField
+    Title="Correo"
+    Icon="{FontImageSource FontFamily=FASolid, Glyph={x:Static fa:Solid.User}}"  x:Name="usernameEntry" BorderColor="#f1f1f1" TextColor="#f1f1f1" AccentColor="#f1f1f1" TitleColor="#f1f1f1"/>
+
+        <material:TextField Title="Contraseña" IsPassword="True" x:Name="passwordEntry" BorderColor="#f1f1f1" TextColor="#f1f1f1" AccentColor="#f1f1f1" TitleColor="#f1f1f1">
+            <material:TextField.Attachments>
+                <material:TextFieldPasswordShowHideAttachment />
+            </material:TextField.Attachments>
+        </material:TextField>
+
+        <Button Text="Login" Clicked="OnLoginButtonClicked" Background="Green" />
     </StackLayout>
 </ContentPage>

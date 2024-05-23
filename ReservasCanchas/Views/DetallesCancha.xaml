@@ -42,11 +42,18 @@
                 </Grid>
                 <VerticalStackLayout Padding="20" Spacing="15">
                 
-                    <Label Text="{Binding Cancha.Nombre}" TextColor="#f1f1f1"/>
-                    <Label Text="{Binding Cancha.Precio}" TextColor="#f1f1f1"/>
-                    <Label Text="{Binding Cancha.TipoSuperficie}" TextColor="#f1f1f1"/>
-                    <Label Text="{Binding Cancha.Descripcion}" TextColor="#f1f1f1"/>
-                    <Label Text="{Binding Cancha.Disponibilidad}" TextColor="#f1f1f1"/>
+                    <Label Text="{Binding Cancha.Nombre, StringFormat='Nombre: {0}'}" TextColor="#f1f1f1" FontSize="Default" FontAttributes="Bold"/>
+                <Label Text="{Binding Cancha.Direccion, StringFormat='Direccion: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
+                <Label Text="{Binding Cancha.HoraApertura, StringFormat='Hora apertura: {0}'}" TextColor="#f1f1f1" FontSize="Default" FontAttributes="Bold" />
+                <Label Text="{Binding Cancha.HoraCierre, StringFormat='Hora cierre: {0}'}" TextColor="#f1f1f1" FontSize="Default" FontAttributes="Bold"/>
+                <Label Text="{Binding Cancha.Dimensiones, StringFormat='Dimensiones: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
+                <Label Text="{Binding Cancha.Contacto, StringFormat='Contacto: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
+                <Label Text="{Binding Cancha.CapacidadMaxima, StringFormat='Capacidad Maxima: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
+
+                <Label Text="{Binding Cancha.Precio, StringFormat='Precio: {0}'}" TextColor="#f1f1f1"   FontSize="Default" FontAttributes="Bold" />
+                <Label Text="{Binding Cancha.TipoSuperficie, StringFormat='Tipo de superficie: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold"/>
+                <Label Text="{Binding Cancha.Descripcion, StringFormat='Descripcion:{0}'}" TextColor="#f1f1f1"   FontSize="Default" FontAttributes="Bold"/>
+                <Label Text="{Binding Cancha.Disponibilidad, StringFormat='Disponibilidad: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
             
                     <Button Text="Reservar"
                      TextColor="White"

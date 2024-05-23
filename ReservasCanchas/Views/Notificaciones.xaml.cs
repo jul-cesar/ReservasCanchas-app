@@ -8,8 +8,9 @@ namespace ReservasCanchas.Views
     {
         public ObservableCollection<Notificacion> NotificacionesList { get; set; }
         HttpClient httpClient { get; set; }
+        int CurrentUserId;
 
-        string URL = "https://reserva-canchas.vercel.app";
+        string URL = "https://reserva-canchas-three.vercel.app";
 
         public Notificaciones()
         {
@@ -17,6 +18,8 @@ namespace ReservasCanchas.Views
             NotificacionesList = new ObservableCollection<Notificacion>();
             httpClient = new HttpClient();
             BindingContext = this;
+            CurrentUserId = Preferences.Get("IdUsuario", 0);
+
         }
 
         protected async override void OnAppearing()
@@ -29,7 +32,7 @@ namespace ReservasCanchas.Views
         {
             try
             {
-                var response = await httpClient.GetAsync($"{URL}/notificacion/1");
+                var response = await httpClient.GetAsync($"{URL}/notificacion/{CurrentUserId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var productData = await response.Content.ReadAsStringAsync();

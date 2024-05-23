@@ -19,10 +19,10 @@ namespace ReservasCanchas.ViewModels
         {
             serviceReservas = service;
             Suministros = new ObservableCollection<Suministro>();
-            SelectedSupplements = new ObservableCollection<Suministro>();
 
-            // Load the data when the ViewModel is initialized
-            GetSuministrosAsync();
+            SelectedSupplements = new ObservableCollection<Suministro>();
+            CurrentUserId = Preferences.Get("IdUsuario", 0);
+
         }
 
         [ObservableProperty]
@@ -42,6 +42,7 @@ namespace ReservasCanchas.ViewModels
 
         [ObservableProperty]
         public ObservableCollection<Suministro> suministros;
+
 
         [ObservableProperty]
         public ObservableCollection<Suministro> selectedSupplements;
@@ -76,6 +77,10 @@ namespace ReservasCanchas.ViewModels
         [ObservableProperty]
         public TimeSpan horaFinalizacion;
 
+        [ObservableProperty]
+
+        int currentUserId;
+
         public string FechaInicioString => FechaInicio.ToString("dd/MM/yyyy");
 
 
@@ -100,6 +105,8 @@ namespace ReservasCanchas.ViewModels
             }
         }
 
+
+
         [RelayCommand]
         public async Task CreateReservaAsync()
         {
@@ -115,7 +122,7 @@ namespace ReservasCanchas.ViewModels
 
                 var reserva = new Reserva
                 {
-                    IDUsuario = 1,
+                    IDUsuario = CurrentUserId,
                     Duracion = Duracion,
                     Estado = "Confirmada",
                     EstadoPago = "Pagado",
@@ -146,7 +153,6 @@ namespace ReservasCanchas.ViewModels
                 Console.WriteLine("JSON enviado:");
                 Console.WriteLine(reservaJson);
 
-                // Send the JSON to the service
                 var content = new StringContent(reservaJson, Encoding.UTF8, "application/json");
                 await serviceReservas.CrearReserva(content);
             }

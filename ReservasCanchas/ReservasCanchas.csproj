@@ -38,6 +38,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -59,7 +63,9 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\appointment.png" />
 	  <None Remove="Resources\Images\calendar.jpg" />
+	  <None Remove="Resources\Images\fav.png" />
 	  <None Remove="Resources\Images\footballfield.png" />
+	  <None Remove="Resources\Images\nofav.png" />
 	  <None Remove="Resources\Images\notification.png" />
 	</ItemGroup>
 
@@ -71,6 +77,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.Maui.Calendar" Version="1.1.6" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.8" />
 		<PackageReference Include="UraniumUI" Version="2.8.1" />
 		<PackageReference Include="UraniumUI.Dialogs.CommunityToolkit" Version="2.8.0" />
 		<PackageReference Include="UraniumUI.Dialogs.Mopups" Version="2.8.1" />

@@ -22,11 +22,11 @@ public partial class Login : ContentPage
             var jsonContent = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("https://reserva-canchas.vercel.app/auth/login", content);
+            var response = await _httpClient.PostAsync("https://reserva-canchas-three.vercel.app/auth/login", content);
 
             if (!response.IsSuccessStatusCode)
             {
-                await DisplayAlert("Error", $"Error de red: {response.StatusCode}", "OK");
+                await DisplayAlert("Error", "Credenciales no validas, intentalo de nuevo", "OK");
                 return null;
             }
 
@@ -55,7 +55,7 @@ public partial class Login : ContentPage
         }
         catch (HttpRequestException ex)
         {
-            await DisplayAlert("Error", $"Error de red: {ex.Message}", "OK");
+            await DisplayAlert("Error", "Credenciales no validas, intentalo de nuevo", "OK");
         }
         catch (JsonException ex)
         {
@@ -73,7 +73,6 @@ public partial class Login : ContentPage
 
     private async void OnLoginButtonClicked(object sender, EventArgs e)
     {
-        // Asegúrate de que las entradas no sean null
         if (usernameEntry == null || passwordEntry == null)
         {
             await DisplayAlert("Error", "Por favor, asegúrate de que los campos de email y contraseña estén definidos.", "OK");

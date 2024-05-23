@@ -11,35 +11,36 @@
             <GradientStop Color="#222021" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+    <ScrollView>
     <StackLayout>
         <Label Text="Notificaciones" FontAttributes="Bold" FontSize="Large" TextColor="#f1f1f1" Margin="14" TextDecorations="Underline"/>
-        <CollectionView ItemsSource="{Binding NotificacionesList}" >
+        <CollectionView ItemsSource="{Binding NotificacionesList}" ItemsLayout="VerticalList" ItemSizingStrategy="MeasureFirstItem">
             <CollectionView.ItemTemplate>
-                
                 <DataTemplate>
-                <Frame HasShadow="True" HeightRequest="120" Margin="9"  Padding="4"
-                       BackgroundColor="#191919" 
-                                   BorderColor="#191919"
-   CornerRadius="10"
-       IsClippedToBounds="True">
-                    <StackLayout Padding="10" Margin="8" Spacing="7">
-                        <Label Text="{Binding Tipo}" 
-                            FontSize="Medium" 
-                               TextColor="#f1f1f1"
-                            FontAttributes="Bold"/>
-                        <Label Text="{Binding Mensaje}" 
-                               TextColor="#f1f1f1"
-                            FontSize="Small" 
-                            />
-                        <Label Text="{Binding FechaHoraEnvio, StringFormat='{0:dd/MM/yyyy HH:mm}'}" 
-                            FontSize="Small" 
-                               TextColor="Gray"
-                         />
-                    </StackLayout>
-                </Frame>
-            </DataTemplate>
-                
+                    <Frame HasShadow="True" HeightRequest="120" Margin="9" Padding="4"
+                   BackgroundColor="#191919" 
+                   BorderColor="#191919"
+                   CornerRadius="10"
+                   IsClippedToBounds="True">
+                        <StackLayout Padding="10" Margin="8" Spacing="7">
+                            <Label Text="{Binding Tipo}" 
+                           FontSize="Medium" 
+                           TextColor="#f1f1f1"
+                           FontAttributes="Bold"/>
+                            <Label Text="{Binding Mensaje}" 
+                           TextColor="#f1f1f1"
+                           FontSize="Small" 
+                           />
+                            <Label Text="{Binding FechaHoraEnvio, StringFormat='{0:dd/MM/yyyy HH:mm}'}" 
+                           FontSize="Small" 
+                           TextColor="Gray"
+                           />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
     </StackLayout>
+    </ScrollView>
 </ContentPage>

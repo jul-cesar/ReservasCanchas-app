@@ -9,6 +9,8 @@ namespace ReservasCanchas.Services
     {
         private readonly HttpClient httpClient;
         List<Suministro> suministrosLista = new();
+        List<ReservasResponse> reservasUserLista = new();
+
         List<ReservasResponse> reservasLista = new();
 
         public ReservasService()
@@ -16,14 +18,14 @@ namespace ReservasCanchas.Services
             httpClient = new HttpClient();
         }
 
-        private const string URL = "https://reserva-canchas.vercel.app/reserva";
+        private const string URL = "https://reserva-canchas-three.vercel.app/reserva";
 
         public async Task<List<Suministro>> GetSuministros()
         {
 
             try
             {
-                var response = await httpClient.GetAsync("https://reserva-canchas.vercel.app/suministro");
+                var response = await httpClient.GetAsync("https://reserva-canchas-three.vercel.app/suministro");
                 if (response.IsSuccessStatusCode)
                 {
                     var suministrosData = await response.Content.ReadAsStringAsync();
@@ -36,6 +38,26 @@ namespace ReservasCanchas.Services
             }
 
             return suministrosLista;
+        }
+
+        public async Task<List<ReservasResponse>> GetReservasUser(int IdUser)
+        {
+
+            try
+            {
+                var response = await httpClient.GetAsync($"https://reserva-canchas-three.vercel.app/reserva/user/{IdUser}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var reservasData = await response.Content.ReadAsStringAsync();
+                    reservasUserLista = JsonSerializer.Deserialize<List<ReservasResponse>>(reservasData);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Error: {ex.Message}. Por favor, intenta de nuevo en unos instantes", "OK");
+            }
+
+            return reservasUserLista;
         }
 
 

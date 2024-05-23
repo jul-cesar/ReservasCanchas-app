@@ -2,11 +2,47 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReservasCanchas.Views.ReservasView"
+             Shell.NavBarIsVisible="False"
+            
              Title="ReservasView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#3d432a" Offset="0.1" />
+            <GradientStop Color="#222021" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <ScrollView>
+    <StackLayout>
+        <Label Text="Mis Reservas" FontAttributes="Bold" FontSize="Large" TextColor="#f1f1f1" Margin="14" TextDecorations="Underline"/>
+
+
+
+        <CollectionView ItemsSource="{Binding ReservasUser}" 
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="True" Margin="10" Padding="10"
+                           BackgroundColor="#191919" 
+                           BorderColor="#191919"
+                           CornerRadius="10"
+                           IsClippedToBounds="True">
+                        <StackLayout Spacing="5">
+                            <Label Text="{Binding IDReserva, StringFormat='ID Reserva: {0}'}" TextColor="#f1f1f1" FontSize="Medium" FontAttributes="Bold"/>
+                            <Label Text="{Binding FechaCreacion, StringFormat='Fecha de Creación: {0:dd/MM/yyyy - HH:mm}'}" TextColor="#f1f1f1" FontSize="Small"/>
+
+                            <Label Text="{Binding FechaReserva, StringFormat='Fecha de Reserva: {0:dd/MM/yyyy}'}" TextColor="#f1f1f1" FontSize="Small"/>
+                            <Label Text="{Binding HoraInicio, StringFormat='Hora de Inicio: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
+                            <Label Text="{Binding HoraFinalizacion, StringFormat='Hora de Finalización: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
+                            <Label Text="{Binding canchas.Nombre, StringFormat='Cancha: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
+                            <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
+                            <Label Text="{Binding MetodoPago, StringFormat='Método de Pago: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
+                            <Label Text="{Binding MontoPagado, StringFormat='Monto Pagado: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+    </ScrollView>
 </ContentPage>
