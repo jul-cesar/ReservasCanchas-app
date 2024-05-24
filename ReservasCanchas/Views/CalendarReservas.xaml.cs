@@ -43,7 +43,7 @@ public partial class CalendarReservas : ContentPage
     private async Task<List<ReservasResponse>> GetReservasFromBackend()
     {
         // URL de tu endpoint
-        string url = "https://reserva-canchas.vercel.app/reserva";
+        string url = "https://reserva-canchas-three.vercel.app/reserva";
 
         using (HttpClient client = new HttpClient())
         {

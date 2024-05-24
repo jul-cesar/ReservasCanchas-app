@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Text;
+using CommunityToolkit.Maui.Alerts;
 using Newtonsoft.Json;
 using ReservasCanchas.Models;
 
@@ -17,8 +18,10 @@ public partial class Login : ContentPage
 
     public async Task<Usuario> LoginFn(Auth credentials)
     {
+        boton.Text = "Cargando...";
         try
         {
+
             var jsonContent = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
@@ -65,6 +68,10 @@ public partial class Login : ContentPage
         {
             await DisplayAlert("Error", $"Error: {ex.Message}. Por favor, intenta de nuevo en unos instantes", "OK");
         }
+        finally
+        {
+            boton.Text = "Iniciar";
+        }
 
         return null;
     }
@@ -89,7 +96,8 @@ public partial class Login : ContentPage
 
         if (user != null)
         {
-            await DisplayAlert("Éxito", "Inicio de sesión exitoso", "OK");
+            await Toast.Make("Reserva hecha con éxito").Show();
+
         }
     }
 }

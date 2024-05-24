@@ -27,6 +27,6 @@
             </material:TextField.Attachments>
         </material:TextField>
 
-        <Button Text="Login" Clicked="OnLoginButtonClicked" Background="Green" />
+        <Button Text="Iniciar" Clicked="OnLoginButtonClicked" Background="Green" x:Name="boton"/>
     </StackLayout>
 </ContentPage>
