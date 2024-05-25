@@ -22,7 +22,7 @@ public partial class Register : ContentPage
 
     private async void toLoginPage(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(Login));
+        await Shell.Current.GoToAsync(nameof(Login), true);
     }
 
     public class RegisterResponse
@@ -92,7 +92,7 @@ public partial class Register : ContentPage
 
         var credentials = new RegisterCredentials
         {
-            CorreoElectronico = usernameEntry.Text,
+            CorreoElectronico = usernameEntry.Text.ToLower(),
             Contrase_a = passwordEntry.Text,
             Apellido = apellidoEntry.Text,
             Nombre = nombreEntry.Text,

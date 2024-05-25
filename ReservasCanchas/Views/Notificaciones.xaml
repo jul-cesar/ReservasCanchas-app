@@ -15,7 +15,10 @@
     <StackLayout>
         <Label Text="Notificaciones" FontAttributes="Bold" FontSize="Large" TextColor="#f1f1f1" Margin="14" TextDecorations="Underline"/>
         <CollectionView ItemsSource="{Binding NotificacionesList}" ItemsLayout="VerticalList" ItemSizingStrategy="MeasureFirstItem">
-            <CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="No tienes notificaciones aun." HorizontalTextAlignment="Center"  Margin="10" Padding="10" FontSize="Body" FontAttributes="Bold"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame HasShadow="True" HeightRequest="120" Margin="9" Padding="4"
                    BackgroundColor="#191919" 

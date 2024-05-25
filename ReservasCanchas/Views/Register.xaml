@@ -5,6 +5,7 @@
 xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
              Shell.NavBarIsVisible="False"
              x:Class="ReservasCanchas.Views.Register"
+             Shell.TabBarIsVisible="False"
              Title="Register">
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -14,7 +15,7 @@ xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.Fon
     </ContentPage.Background>
     <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
         <Label Text="Reservas Online" TextColor="#f1f1f1" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextDecorations="Underline"/>
-        <Label Text="Inicia sesion" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" TextColor="#f1f1f1"/>
+        <Label Text="Registrarme" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium" TextColor="#f1f1f1"/>
 
         <material:TextField
  Title="Nombre"
@@ -39,7 +40,7 @@ xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.Fon
         </material:TextField>
 
         <Button Text="Registrarme" Clicked="OnRegisterButtonClicked" Background="Green" x:Name="boton"/>
-        <Label Text="Iniciar sesion" x:Name="gotolog" TextColor="White" HorizontalTextAlignment="End" Margin="4"/>
+        <Label Text="Iniciar sesion" x:Name="gotolog" TextColor="White" HorizontalTextAlignment="End" Margin="4" TextDecorations="Underline"/>
 
     </StackLayout>
 </ContentPage>

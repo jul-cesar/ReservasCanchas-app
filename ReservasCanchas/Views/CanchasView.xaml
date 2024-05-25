@@ -46,13 +46,18 @@
                 Grid.ColumnSpan="2"
                 ItemsSource="{Binding Canchas}"
                 SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="No hay canchas disponibles por el momento, por favor, intenta de nuevo mas tarde" Margin="10" Padding="10" FontSize="Body" FontAttributes="Bold"/>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
+                    
                     <DataTemplate x:DataType="model:Cancha">
                         <Grid Padding="10" ColumnDefinitions="*, auto">
                             <Frame HeightRequest="120" BackgroundColor="#191919"
                                    BorderColor="#191919"
                                    HasShadow="True"
                                    Padding="0"
+                                   Margin="4"
                                    CornerRadius="10"
                                    IsClippedToBounds="True">
                                 <Frame.GestureRecognizers>
@@ -79,7 +84,7 @@
                                    Aspect="AspectFit"
                                    WidthRequest="30"
                                    HeightRequest="30"
-                                   Margin="4"
+                                  
                                    Source="{Binding IsFavorite, Converter={StaticResource BoolToFavoriteImageConverter}}"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End">

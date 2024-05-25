@@ -18,6 +18,9 @@
                     <BoxView  Grid.ColumnSpan="3"
                              HeightRequest="160"
                              HorizontalOptions="FillAndExpand">
+                   
+                      
+                   
                         <BoxView.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#3d432a" Offset="0.1" />
@@ -27,59 +30,42 @@
                     </BoxView>
 
                     <Frame Grid.RowSpan="2" Grid.Column="1" HeightRequest="160"
-                           WidthRequest="160"
-                           CornerRadius="80"
+                           WidthRequest="200"
                            HorizontalOptions="Center"
                            IsClippedToBounds="True"
+                           CornerRadius="20"
                            Padding="0"
                            Margin="0,80,0,0">
-                        <Image Aspect="Fill" HeightRequest="160"
-                               WidthRequest="160"
+                        <Image Aspect="AspectFit" HeightRequest="160"
+                               WidthRequest="360"
                                HorizontalOptions="Center"
                                Source="{Binding Cancha.ImgURL}"
                                VerticalOptions="Center"/>
                     </Frame>
                 </Grid>
+            <ScrollView>
                 <VerticalStackLayout Padding="20" Spacing="15">
-                
-                    <Label Text="{Binding Cancha.Nombre, StringFormat='Nombre: {0}'}" TextColor="#f1f1f1" FontSize="Default" FontAttributes="Bold"/>
-                <Label Text="{Binding Cancha.Direccion, StringFormat='Direccion: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
-                <Label Text="{Binding Cancha.HoraApertura, StringFormat='Hora apertura: {0}'}" TextColor="#f1f1f1" FontSize="Default" FontAttributes="Bold" />
-                <Label Text="{Binding Cancha.HoraCierre, StringFormat='Hora cierre: {0}'}" TextColor="#f1f1f1" FontSize="Default" FontAttributes="Bold"/>
-                <Label Text="{Binding Cancha.Dimensiones, StringFormat='Dimensiones: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
-                <Label Text="{Binding Cancha.Contacto, StringFormat='Contacto: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
-                <Label Text="{Binding Cancha.CapacidadMaxima, StringFormat='Capacidad Maxima: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
-
-                <Label Text="{Binding Cancha.Precio, StringFormat='Precio: {0}'}" TextColor="#f1f1f1"   FontSize="Default" FontAttributes="Bold" />
-                <Label Text="{Binding Cancha.TipoSuperficie, StringFormat='Tipo de superficie: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold"/>
-                <Label Text="{Binding Cancha.Descripcion, StringFormat='Descripcion:{0}'}" TextColor="#f1f1f1"   FontSize="Default" FontAttributes="Bold"/>
-                <Label Text="{Binding Cancha.Disponibilidad, StringFormat='Disponibilidad: {0}'}" TextColor="#f1f1f1"  FontSize="Default" FontAttributes="Bold" />
-            
-                    <Button Text="Reservar"
-                     TextColor="White"
-                     BackgroundColor="#3d432a"
-
-                  Command="{Binding OpenDetailPopupCommand}"
-                                        CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}"
-
-                      CornerRadius="20"
-                     WidthRequest="150"
-                     HeightRequest="50"
-                     Margin="0,0,0,20" />
-              
-
-            <Button Text="Ver horarios"
-                    Command="{Binding goToReservasCanchaCommand}"
-            CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}"
-
-                    TextColor="White"
-                    BackgroundColor="#3d432a"
-                    CornerRadius="20"
-                    WidthRequest="150"
-                    HeightRequest="50"
-                    Margin="0,0,0,20"/>
+                   
+                    <Label Text="{Binding Cancha.Nombre, StringFormat='Nombre: {0}'}" FontSize="22" FontAttributes="Bold" TextColor="#f1f1f1"/>
+                    <Label Text="{Binding Cancha.Direccion, StringFormat='Direccion: {0}'}" FontSize="16" TextColor="#666666"/>
+                    <Label Text="{Binding Cancha.HoraApertura, StringFormat='Hora Apertura: {0} - '}" FontSize="16" TextColor="#666666"/>
+                    <Label Text="{Binding Cancha.HoraCierre, StringFormat='{0}'}" FontSize="16" TextColor="#666666"/>
+                    <Label Text="{Binding Cancha.Dimensiones, StringFormat='Dimensiones: {0}'}" FontSize="16" TextColor="#666666"/>
+                    <Label Text="{Binding Cancha.Contacto, StringFormat='Contacto: {0}'}" FontSize="16" TextColor="#666666"/>
+                    <Label Text="{Binding Cancha.CapacidadMaxima, StringFormat='Capacidad Maxima: {0}'}" FontSize="16" TextColor="#666666"/>
+                    <Label Text="{Binding Cancha.Precio, StringFormat='Precio: {0}'}" FontSize="16" TextColor="#666666"/>
+                    <Label Text="{Binding Cancha.TipoSuperficie, StringFormat='Tipo de superficie: {0}'}" FontSize="16" TextColor="#666666"/>
+                    <Label Text="{Binding Cancha.Descripcion, StringFormat='Descripcion:{0}'}" FontSize="16" TextColor="#666666"/>
+                    <Button Text="Reservar" Command="{Binding OpenDetailPopupCommand}"
+                       CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}" BackgroundColor="#3d432a" TextColor="White" CornerRadius="20" Margin="4"/>
+                    <Button Text="Ver horarios"        Command="{Binding goToReservasCanchaCommand}"
+CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}" BackgroundColor="#3d432a" TextColor="White" CornerRadius="20"/>
                 </VerticalStackLayout>
+            </ScrollView>
+
+
             </VerticalStackLayout>
+           
         </ScrollView>
 
      

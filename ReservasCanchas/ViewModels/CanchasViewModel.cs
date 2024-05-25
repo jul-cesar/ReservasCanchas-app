@@ -143,7 +143,7 @@ namespace ReservasCanchas.ViewModels
                 Preferences.Remove("rol");
                 Preferences.Remove("Nombre");
 
-                await Shell.Current.GoToAsync(nameof(Login));
+                await Shell.Current.GoToAsync(nameof(Login), true);
 
             }
             catch (Exception ex)

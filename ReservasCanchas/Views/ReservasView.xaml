@@ -19,7 +19,9 @@
 
         <CollectionView ItemsSource="{Binding ReservasUser}" 
                         SelectionMode="None">
-
+                <CollectionView.EmptyView>
+                    <Label Text="No tienes reservas aun, ve a la seccion de canchas y haz una reserva." Margin="10" Padding="10" FontSize="Body" FontAttributes="Bold"/>
+                </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame HasShadow="True" Margin="10" Padding="10"

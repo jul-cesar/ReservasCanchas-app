@@ -13,7 +13,8 @@ public partial class Login : ContentPage
     public Login()
     {
         InitializeComponent();
-
+        usernameEntry.Text = "";
+        passwordEntry.Text = "";
         _httpClient = new HttpClient();
         var tapGestureRecognizer = new TapGestureRecognizer();
         tapGestureRecognizer.Tapped += toRegisterPage;
@@ -24,7 +25,7 @@ public partial class Login : ContentPage
     {
         Application.Current.MainPage = new AppShell();
 
-        await Shell.Current.GoToAsync(nameof(Register));
+        await Shell.Current.GoToAsync(nameof(Register), true);
     }
 
     public async Task<Usuario> LoginFn(Auth credentials)
@@ -99,15 +100,15 @@ public partial class Login : ContentPage
 
         var credentials = new Auth
         {
-            email = usernameEntry.Text,
-            password = passwordEntry.Text
+            email = usernameEntry.Text.ToLower(),
+            password = passwordEntry.Text.ToLower()
         };
 
         var user = await LoginFn(credentials);
 
         if (user != null)
         {
-            await Toast.Make("Reserva hecha con éxito").Show();
+            await Toast.Make("Sesion iniciada correctamente").Show();
 
         }
     }
