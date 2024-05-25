@@ -102,6 +102,9 @@
 	  <MauiXaml Update="Views\Notificaciones.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Register.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ReservasCancha.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

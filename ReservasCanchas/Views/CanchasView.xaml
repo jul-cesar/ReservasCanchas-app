@@ -28,11 +28,12 @@
             <GradientStop Color="#222021" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
-
-    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions=" Auto,*, *" RowSpacing="0" Padding="10">
+       
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions=" Auto,*, *" RowSpacing="0" Padding="10">
 
         <FlexLayout Grid.Row="0" Grid.ColumnSpan="2" JustifyContent="Center" Direction="Column" AlignItems="Center">
-            <Label Text="Reservas Online" FontAttributes="Bold" TextColor="#f1f1f1" Margin="10" FontSize="Large"/>
+                <Button Text="Cerrar sesion" FlexLayout.AlignSelf="End" Margin="2" Command="{Binding LogOutCommand}" StyleClass="TextButton"/>
+                <Label Text="Reservas Online" FontAttributes="Bold" TextColor="#f1f1f1" Margin="10" FontSize="Large"/>
             <Label Text="{Binding Nombre, StringFormat='Bienvenido, {0}'}" Padding="10" Margin="3" FontAttributes="Bold" TextColor="#f1f1f1" FontSize="Header"/>
             
         </FlexLayout>
@@ -99,5 +100,5 @@
                            Color="{StaticResource Primary}"
                            Grid.RowSpan="2"
                            Grid.ColumnSpan="2"/>
-    </Grid>
+        </Grid>
 </ContentPage>

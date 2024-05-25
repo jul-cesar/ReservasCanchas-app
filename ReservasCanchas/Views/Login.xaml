@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
-
-
+                Shell.NavBarIsVisible="False"
              x:Class="ReservasCanchas.Views.Login"
              Title="Login">
 
@@ -28,5 +27,7 @@
         </material:TextField>
 
         <Button Text="Iniciar" Clicked="OnLoginButtonClicked" Background="Green" x:Name="boton"/>
+        <Label Text="Registrarme" x:Name="gotoreg" TextColor="White" HorizontalTextAlignment="End" Margin="4"/>
+
     </StackLayout>
 </ContentPage>

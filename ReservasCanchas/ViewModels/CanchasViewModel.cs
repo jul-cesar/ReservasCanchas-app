@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using ReservasCanchas.LocalDb;
 using ReservasCanchas.Models;
 using ReservasCanchas.Services;
+using ReservasCanchas.Views;
 namespace ReservasCanchas.ViewModels
 {
     public partial class CanchasViewModel : BaseViewModel
@@ -129,6 +130,26 @@ namespace ReservasCanchas.ViewModels
             {
                 IsBusy = false;
                 IsRefreshing = false;
+            }
+        }
+
+        [RelayCommand]
+        async Task LogOut()
+        {
+            try
+            {
+
+                Preferences.Remove("IdUsuario");
+                Preferences.Remove("rol");
+                Preferences.Remove("Nombre");
+
+                await Shell.Current.GoToAsync(nameof(Login));
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+
             }
         }
 

@@ -6,68 +6,63 @@ using ReservasCanchas.Models;
 
 namespace ReservasCanchas.Views;
 
-public partial class Login : ContentPage
+public partial class Register : ContentPage
 {
     private readonly HttpClient _httpClient;
 
-    public Login()
+    public Register()
     {
         InitializeComponent();
-
         _httpClient = new HttpClient();
+
         var tapGestureRecognizer = new TapGestureRecognizer();
-        tapGestureRecognizer.Tapped += toRegisterPage;
-        gotoreg.GestureRecognizers.Add(tapGestureRecognizer);
+        tapGestureRecognizer.Tapped += toLoginPage;
+        gotolog.GestureRecognizers.Add(tapGestureRecognizer);
     }
 
-    public async void toRegisterPage(object sender, EventArgs e)
+    private async void toLoginPage(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new AppShell();
-
-        await Shell.Current.GoToAsync(nameof(Register));
+        await Shell.Current.GoToAsync(nameof(Login));
     }
 
-    public async Task<Usuario> LoginFn(Auth credentials)
+    public class RegisterResponse
+    {
+        public string message { get; set; }
+    }
+
+    public async Task<RegisterResponse> RegisterFn(RegisterCredentials credentials)
     {
         boton.Text = "Cargando...";
         try
         {
-
             var jsonContent = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("https://reserva-canchas-three.vercel.app/auth/login", content);
+            var response = await _httpClient.PostAsync("https://reserva-canchas.vercel.app/auth/register", content);
 
             if (!response.IsSuccessStatusCode)
             {
-                await DisplayAlert("Error", "Credenciales no validas, intentalo de nuevo", "OK");
+                await DisplayAlert("Error", "Correo ya en uso", "OK");
                 return null;
             }
 
             var responseContent = await response.Content.ReadAsStringAsync();
             Debug.WriteLine(responseContent);
 
-            var data = JsonConvert.DeserializeObject<Usuario>(responseContent);
+            var data = JsonConvert.DeserializeObject<RegisterResponse>(responseContent);
 
             if (data != null)
             {
-                Preferences.Set("IdUsuario", data.IDUsuario);
-                Preferences.Set("rol", data.Rol);
-                Preferences.Set("Nombre", data.Nombre);
-
-                Application.Current.MainPage = new AppShell();
-
-                await Shell.Current.GoToAsync("//MainPage");
-
+                await Shell.Current.GoToAsync(nameof(Login));
                 return data;
             }
             else
             {
-                await DisplayAlert("Error", "Credenciales inválidas.", "OK");
+                await DisplayAlert("Error", "Correo ya registrado", "OK");
                 return null;
             }
         }
-        catch (HttpRequestException ex)
+        catch (HttpRequestException)
         {
             await DisplayAlert("Error", "Credenciales no validas, intentalo de nuevo", "OK");
         }
@@ -81,15 +76,13 @@ public partial class Login : ContentPage
         }
         finally
         {
-            boton.Text = "Iniciar";
+            boton.Text = "Registrarme";
         }
 
         return null;
     }
 
-
-
-    private async void OnLoginButtonClicked(object sender, EventArgs e)
+    private async void OnRegisterButtonClicked(object sender, EventArgs e)
     {
         if (usernameEntry == null || passwordEntry == null)
         {
@@ -97,18 +90,21 @@ public partial class Login : ContentPage
             return;
         }
 
-        var credentials = new Auth
+        var credentials = new RegisterCredentials
         {
-            email = usernameEntry.Text,
-            password = passwordEntry.Text
+            CorreoElectronico = usernameEntry.Text,
+            Contrase_a = passwordEntry.Text,
+            Apellido = apellidoEntry.Text,
+            Nombre = nombreEntry.Text,
+            Rol = "User",
+            Telefono = tlfEntry.Text
         };
 
-        var user = await LoginFn(credentials);
+        var user = await RegisterFn(credentials);
 
         if (user != null)
         {
-            await Toast.Make("Reserva hecha con éxito").Show();
-
+            await Toast.Make("Registrado con éxito").Show();
         }
     }
 }
