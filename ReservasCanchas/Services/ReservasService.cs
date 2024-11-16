@@ -18,14 +18,14 @@ namespace ReservasCanchas.Services
             httpClient = new HttpClient();
         }
 
-        private const string URL = "https://reserva-canchas-three.vercel.app/reserva";
+        private const string URL = "https://67e7-2800-e2-407f-fd96-4daa-3067-13f5-605c.ngrok-free.app";
 
         public async Task<List<Suministro>> GetSuministros()
         {
 
             try
             {
-                var response = await httpClient.GetAsync("https://reserva-canchas-three.vercel.app/suministro");
+                var response = await httpClient.GetAsync($"{URL}/suministro");
                 if (response.IsSuccessStatusCode)
                 {
                     var suministrosData = await response.Content.ReadAsStringAsync();
@@ -45,7 +45,7 @@ namespace ReservasCanchas.Services
 
             try
             {
-                var response = await httpClient.GetAsync($"https://reserva-canchas-three.vercel.app/reserva/user/{IdUser}");
+                var response = await httpClient.GetAsync($"{URL}/reserva/user/{IdUser}");
                 if (response.IsSuccessStatusCode)
                 {
                     var reservasData = await response.Content.ReadAsStringAsync();
@@ -69,7 +69,7 @@ namespace ReservasCanchas.Services
             try
             {
                 Debug.WriteLine(content);
-                var response = await httpClient.PostAsync(URL, content);
+                var response = await httpClient.PostAsync($"{URL}/reserva", content);
 
                 if (response.IsSuccessStatusCode)
                 {

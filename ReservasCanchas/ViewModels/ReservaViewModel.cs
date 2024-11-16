@@ -81,6 +81,8 @@ namespace ReservasCanchas.ViewModels
 
         int currentUserId;
 
+
+
         public string FechaInicioString => FechaInicio.ToString("dd/MM/yyyy");
 
 

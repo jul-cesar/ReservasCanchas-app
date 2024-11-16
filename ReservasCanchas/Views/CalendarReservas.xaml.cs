@@ -42,8 +42,7 @@ public partial class CalendarReservas : ContentPage
 
     private async Task<List<ReservasResponse>> GetReservasFromBackend()
     {
-        // URL de tu endpoint
-        string url = "https://reserva-canchas-three.vercel.app/reserva";
+        string url = "https://67e7-2800-e2-407f-fd96-4daa-3067-13f5-605c.ngrok-free.app/reserva";
 
         using (HttpClient client = new HttpClient())
         {
@@ -60,7 +59,7 @@ public partial class CalendarReservas : ContentPage
     {
         foreach (var reserva in reservas)
         {
-            DateTime fechaReserva = reserva.FechaReserva.Date; // Use only the date part
+            DateTime fechaReserva = reserva.FechaReserva.Date; 
 
             if (!Events.ContainsKey(fechaReserva))
             {

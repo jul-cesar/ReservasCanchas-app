@@ -6,8 +6,8 @@
              xmlns:viewmodel="clr-namespace:ReservasCanchas.ViewModels"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:local="clr-namespace:ReservasCanchas.Converters"
-             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
              Shell.NavBarIsVisible="False"
              x:DataType="viewmodel:CanchasViewModel"
              Title="{Binding Title}">
@@ -18,92 +18,114 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.Behaviors>
-        <mct:StatusBarBehavior StatusBarColor="#3d422a"/>
-    </ContentPage.Behaviors>
-
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#3d432a" Offset="0.1" />
-            <GradientStop Color="#222021" Offset="1.0" />
+            <GradientStop Color="#1E1E2C" Offset="0.0" />
+            <GradientStop Color="#252540" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
-       
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions=" Auto,*, *" RowSpacing="0" Padding="10">
 
-        <FlexLayout Grid.Row="0" Grid.ColumnSpan="2" JustifyContent="Center" Direction="Column" AlignItems="Center">
-                <Button Text="Cerrar sesion" FlexLayout.AlignSelf="End" Margin="2" Command="{Binding LogOutCommand}" StyleClass="TextButton"/>
-                <Label Text="Reservas Online" FontAttributes="Bold" TextColor="#f1f1f1" Margin="10" FontSize="Large"/>
-            <Label Text="{Binding Nombre, StringFormat='Bienvenido, {0}'}" Padding="10" Margin="3" FontAttributes="Bold" TextColor="#f1f1f1" FontSize="Header"/>
-            
-        </FlexLayout>
+    <Grid ColumnDefinitions="*,*"
+          RowDefinitions="Auto, *, Auto"
+          RowSpacing="10"
+          Padding="10">
 
-        <RefreshView Grid.ColumnSpan="2" Command="{Binding getCanchasCommand}"
-                     IsRefreshing="{Binding IsRefreshing}"
-                     Grid.Row="1"
-                     Grid.RowSpan="2">
-            <CollectionView
-                Grid.ColumnSpan="2"
-                ItemsSource="{Binding Canchas}"
-                SelectionMode="None">
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2" Padding="10" Spacing="5">
+            <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center">
+                <Label Text="Reservas Online"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       TextColor="#FFFFFF"/>
+                <Button Text="Cerrar sesión"
+                        Command="{Binding LogOutCommand}"
+                        FontAttributes="Bold"
+                        BackgroundColor="#FF5A5F"
+                        TextColor="#FFFFFF"
+                        Padding="10,5"
+                        CornerRadius="10"/>
+            </FlexLayout>
+            <Label Text="{Binding Nombre, StringFormat='Bienvenido, {0}'}"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="#A0A0A0"/>
+        </VerticalStackLayout>
+
+        <!-- Lista de canchas -->
+        <RefreshView Grid.Row="1"
+                     Grid.ColumnSpan="2"
+                     Command="{Binding getCanchasCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Canchas}"
+                            SelectionMode="None">
                 <CollectionView.EmptyView>
-                    <Label Text="No hay canchas disponibles por el momento, por favor, intenta de nuevo mas tarde" Margin="10" Padding="10" FontSize="Body" FontAttributes="Bold"/>
+                    <Label Text="No hay canchas disponibles por el momento."
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#A0A0A0"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
-                    
                     <DataTemplate x:DataType="model:Cancha">
-                        <Grid Padding="10" ColumnDefinitions="*, auto">
-                            <Frame HeightRequest="120" BackgroundColor="#191919"
-                                   BorderColor="#191919"
-                                   HasShadow="True"
-                                   Padding="0"
-                                   Margin="4"
-                                   CornerRadius="10"
-                                   IsClippedToBounds="True">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                        <Frame Padding="10"
+                               BackgroundColor="#33334C"
+                               CornerRadius="15"
+                               HasShadow="True"
+                               Margin="5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchasViewModel }}, Path=GoToDetailsCommand}"/>
-                                </Frame.GestureRecognizers>
-                                <Grid Padding="0" ColumnDefinitions="120, *">
-                                    <Image Aspect="AspectFill"
-                                           Source="{Binding ImgURL}"
-                                           WidthRequest="120"
-                                           HeightRequest="120"/>
-                                    <FlexLayout Grid.Column="1"
-                                                Direction="Column"
-                                                AlignItems="Center"
-                                                AlignContent="Center"
-                                                Padding="10"
-                                                VerticalOptions="Center">
-                                        <Label Text="{Binding Nombre}" TextColor="#f1f1f1" FontAttributes="Bold" FontSize="Medium" Margin="4"/>
-                                        <Label Text="{Binding Disponibilidad}" TextColor="#667a34" FontAttributes="Bold"/>
-                                    </FlexLayout>
-                                </Grid>
-                            </Frame>
-                            <Image Grid.Column="1"
-                                   Aspect="AspectFit"
-                                   WidthRequest="30"
-                                   HeightRequest="30"
-                                  
-                                   Source="{Binding IsFavorite, Converter={StaticResource BoolToFavoriteImageConverter}}"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="End">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding .}"
-                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchasViewModel}}, Path=ToggleFavoriteCommand}"/>
-                                </Image.GestureRecognizers>
-                            </Image>
-                        </Grid>
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="120, *, Auto">
+                                <!-- Imagen de la cancha -->
+                                <Image Grid.Column="0"
+                                       Source="{Binding ImgURL}"
+                                       Aspect="AspectFill"
+                                       WidthRequest="120"
+                                       HeightRequest="120"
+                                       />
+
+                                <!-- Información de la cancha -->
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Padding="10"
+                                                     Spacing="5"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding Nombre}"
+                                           FontAttributes="Bold"
+                                           FontSize="16"
+                                           TextColor="#FFFFFF"/>
+                                    <Label Text="{Binding Disponibilidad}"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{Binding Disponibilidad, Converter={StaticResource DisponibilidadToColorConverter}}"/>
+                                </VerticalStackLayout>
+
+                                <!-- Favorito -->
+                                <Image Grid.Column="2"
+                                       Source="{Binding IsFavorite, Converter={StaticResource BoolToFavoriteImageConverter}}"
+                                       WidthRequest="30"
+                                       HeightRequest="30"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchasViewModel}}, Path=ToggleFavoriteCommand}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
+
+        <!-- Indicador de carga -->
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                            IsRunning="{Binding IsBusy}"
-                           HorizontalOptions="Fill"
                            VerticalOptions="Center"
-                           Color="{StaticResource Primary}"
-                           Grid.RowSpan="2"
-                           Grid.ColumnSpan="2"/>
-        </Grid>
+                           HorizontalOptions="Center"
+                           Grid.RowSpan="3"
+                           Color="#3C91E6"/>
+    </Grid>
 </ContentPage>

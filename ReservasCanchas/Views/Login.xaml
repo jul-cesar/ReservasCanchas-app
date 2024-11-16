@@ -8,11 +8,10 @@
 
              x:Class="ReservasCanchas.Views.Login"
              Title="Login">
-
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#3d432a" Offset="0.1" />
-            <GradientStop Color="#222021" Offset="1.0" />
+            <GradientStop Color="#1E1E2C" Offset="0.0" />
+            <GradientStop Color="#252540" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
     <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
@@ -28,7 +27,7 @@
             </material:TextField.Attachments>
         </material:TextField>
 
-        <Button Text="Iniciar" Clicked="OnLoginButtonClicked" Background="Green" x:Name="boton"/>
+        <Button Text="Iniciar" Clicked="OnLoginButtonClicked" BackgroundColor="#3C91E6" x:Name="boton"/>
         <Label Text="Registrarme" x:Name="gotoreg" TextColor="White" HorizontalTextAlignment="End" Margin="4" TextDecorations="Underline"/>
 
     </StackLayout>

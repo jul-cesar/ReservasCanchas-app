@@ -10,7 +10,7 @@ namespace ReservasCanchas.Views
         HttpClient httpClient { get; set; }
         int CurrentUserId;
 
-        string URL = "https://reserva-canchas-three.vercel.app";
+        string URL = "https://67e7-2800-e2-407f-fd96-4daa-3067-13f5-605c.ngrok-free.app";
 
         public Notificaciones()
         {

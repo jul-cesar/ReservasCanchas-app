@@ -9,8 +9,8 @@ xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.Fon
              Title="Register">
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#3d432a" Offset="0.1" />
-            <GradientStop Color="#222021" Offset="1.0" />
+            <GradientStop Color="#1E1E2C" Offset="0.0" />
+            <GradientStop Color="#252540" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
     <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
@@ -39,7 +39,8 @@ xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.Fon
             </material:TextField.Attachments>
         </material:TextField>
 
-        <Button Text="Registrarme" Clicked="OnRegisterButtonClicked" Background="Green" x:Name="boton"/>
+        <Button Text="Registrarme" Clicked="OnRegisterButtonClicked" BackgroundColor="#3C91E6"
+ x:Name="boton"/>
         <Label Text="Iniciar sesion" x:Name="gotolog" TextColor="White" HorizontalTextAlignment="End" Margin="4" TextDecorations="Underline"/>
 
     </StackLayout>

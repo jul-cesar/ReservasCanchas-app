@@ -1,50 +1,92 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-          
-           xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-           x:DataType="viewmodel:ReservaViewModel"
-           xmlns:viewmodel="clr-namespace:ReservasCanchas.ViewModels"
-           x:Class="ReservasCanchas.Views.AddReservaView"
-           Shell.PresentationMode="ModalAnimated"
-          >
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20" Padding="4">
-        <Label Text="{Binding Cancha.Nombre, StringFormat='Reservar la cancha {0}'}" 
-               HorizontalTextAlignment="Center" 
-               FontAttributes="Bold" 
-               Margin="10"/>
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:viewmodel="clr-namespace:ReservasCanchas.ViewModels"
+             x:Class="ReservasCanchas.Views.AddReservaView"
+             Shell.PresentationMode="ModalAnimated"
+             Title="Nueva Reserva">
 
-   
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E1E2C" Offset="0.0" />
+            <GradientStop Color="#252540" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
 
-        <material:InputField Title="Hora de inicio" HasValue="True">
-            <TimePicker BackgroundColor="Transparent" Time="{Binding HoraInicio, Mode=TwoWay}"/>
-        </material:InputField>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Título -->
+            <Label Text="{Binding Cancha.Nombre, StringFormat='Reservar la cancha {0}'}"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   TextColor="#FFFFFF"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,10,0,20"/>
 
-        <material:TextField Title="Duracion en minutos" 
-                            Keyboard="Numeric" 
-                            Text="{Binding Duracion, Mode=TwoWay}" />
+            <!-- Hora de inicio -->
+            <Frame BackgroundColor="#33334C" CornerRadius="15" Padding="10">
+                <material:InputField Title="Hora de inicio" TitleColor="#FFFFFF" HasValue="True">
+                    <TimePicker BackgroundColor="Transparent" Time="{Binding HoraInicio, Mode=TwoWay}" TextColor="#FFFFFF"/>
+                </material:InputField>
+            </Frame>
 
+            <!-- Duración -->
+            <Frame BackgroundColor="#33334C" CornerRadius="15" Padding="10">
+                <material:TextField Title="Duración en minutos" 
+                                    Keyboard="Numeric" 
+                                    Text="{Binding Duracion, Mode=TwoWay}" 
+                                    TitleColor="#FFFFFF"
+                                    TextColor="#FFFFFF"/>
+            </Frame>
 
-        <material:PickerField 
-            SelectedItem="{Binding MetodoPago, Mode=TwoWay}"
-            Title="Metodo de pago"
-            ItemsSource="{Binding Items}"/>
+            <!-- Método de Pago -->
+            <Frame BackgroundColor="#33334C" CornerRadius="15" Padding="10">
+                <material:PickerField 
+                    SelectedItem="{Binding MetodoPago, Mode=TwoWay}"
+                    Title="Método de pago"
+                    ItemsSource="{Binding Items}"
+                    TitleColor="#FFFFFF"
+                    TextColor="#FFFFFF"/>
+            </Frame>
 
-        <material:TextField Title="Monto a pagar" 
-                            Keyboard="Numeric" 
-                            Text="{Binding MontoPagado, Mode=TwoWay}" />
+            <!-- Monto a pagar -->
+            <Frame BackgroundColor="#33334C" CornerRadius="15" Padding="10">
+                <material:TextField Title="Monto a pagar" 
+                                    Keyboard="Numeric" 
+                                    Text="{Binding MontoPagado, Mode=TwoWay}" 
+                                    TitleColor="#FFFFFF"
+                                    TextColor="#FFFFFF"/>
+            </Frame>
 
-      
+            <!-- Fecha de reserva -->
+            <Frame BackgroundColor="#33334C" CornerRadius="15" Padding="10">
+                <material:DatePickerField Title="Fecha de la reserva"  
+                                          Date="{Binding FechaInicio, Mode=TwoWay}" 
+                                          MinimumDate="{Binding DateToday}" 
+                                          MaximumDate="{Binding DateTodayPlusThreeMonths}"
+                                          TitleColor="#FFFFFF"
+                                          TextColor="#FFFFFF"/>
+            </Frame>
 
-        <material:DatePickerField Title="Fecha de la reserva"  
-                                  Date="{Binding FechaInicio, Mode=TwoWay}" MinimumDate="{Binding DateToday}" MaximumDate="{Binding DateTodayPlusThreeMonths}" />
-        <material:MultiplePickerField  Title="Suministros adicionales" ItemsSource="{Binding Suministros}" SelectedItems="{Binding SelectedSupplements, Mode=TwoWay}" />
+            <!-- Suministros adicionales -->
+            <Frame BackgroundColor="#33334C" CornerRadius="15" Padding="10">
+                <material:MultiplePickerField Title="Suministros adicionales"
+                                              ItemsSource="{Binding Suministros}"
+                                              SelectedItems="{Binding SelectedSupplements, Mode=TwoWay}"
+                                              TitleColor="#FFFFFF"
+                                             />
+            </Frame>
 
-        
-
-        <Button StyleClass="FilledButton" 
-                Text="Reservar"  
-                BackgroundColor="#3d432a" 
-                Command="{Binding CreateReservaCommand}"/>
-    </StackLayout>
+            <!-- Botón Reservar -->
+            <Button Text="Reservar"
+                    BackgroundColor="#3C91E6"
+                    TextColor="#FFFFFF"
+                    FontAttributes="Bold"
+                    CornerRadius="15"
+                    Command="{Binding CreateReservaCommand}"
+                    Padding="10"
+                    HorizontalOptions="Fill"/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

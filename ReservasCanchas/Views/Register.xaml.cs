@@ -38,7 +38,7 @@ public partial class Register : ContentPage
             var jsonContent = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("https://reserva-canchas.vercel.app/auth/register", content);
+            var response = await _httpClient.PostAsync("https://67e7-2800-e2-407f-fd96-4daa-3067-13f5-605c.ngrok-free.app/auth/register", content);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -92,8 +92,8 @@ public partial class Register : ContentPage
 
         var credentials = new RegisterCredentials
         {
-            CorreoElectronico = usernameEntry.Text.ToLower(),
-            Contrase_a = passwordEntry.Text,
+            email = usernameEntry.Text.ToLower(),
+            password = passwordEntry.Text,
             Apellido = apellidoEntry.Text,
             Nombre = nombreEntry.Text,
             Rol = "User",

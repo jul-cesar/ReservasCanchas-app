@@ -1,74 +1,101 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+
              x:Class="ReservasCanchas.DetallesCancha"
              xmlns:viewmodel="clr-namespace:ReservasCanchas.ViewModels"
-             x:DataType="viewmodel:CanchaDetailsViewModel"
-             BackgroundColor="#191919"
+             BackgroundColor="#1E1E2C"
              Shell.PresentationMode="ModalAnimated"
              Title="{Binding Cancha.Nombre}">
 
+    <ScrollView Padding="10">
+        <VerticalStackLayout>
 
- 
-        <ScrollView >
-            <VerticalStackLayout>
-           
-                <Grid ColumnDefinitions="*,Auto,*"
-                      RowDefinitions="160, Auto, Auto">
-                    <BoxView  Grid.ColumnSpan="3"
-                             HeightRequest="160"
-                             HorizontalOptions="FillAndExpand">
-                   
-                      
-                   
-                        <BoxView.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#3d432a" Offset="0.1" />
-                                <GradientStop Color="#222021" Offset="1.0" />
-                            </LinearGradientBrush>
-                        </BoxView.Background>
-                    </BoxView>
+            <!-- Header con imagen de fondo -->
+            <Grid ColumnDefinitions="*,Auto,*"
+                  RowDefinitions="200, Auto, Auto">
+                <Image Grid.ColumnSpan="3"
+                       Source="{Binding Cancha.ImgURL}"
+                       Aspect="AspectFill"
+                       HeightRequest="200"
+                       HorizontalOptions="FillAndExpand"
+                       Opacity="0.8"/>
+                <BoxView Grid.ColumnSpan="3"
+                         BackgroundColor="#000000AA"
+                         HeightRequest="200"/>
 
-                    <Frame Grid.RowSpan="2" Grid.Column="1" HeightRequest="160"
-                           WidthRequest="200"
-                           HorizontalOptions="Center"
-                           IsClippedToBounds="True"
-                           CornerRadius="20"
-                           Padding="0"
-                           Margin="0,80,0,0">
-                        <Image Aspect="AspectFit" HeightRequest="160"
-                               WidthRequest="360"
-                               HorizontalOptions="Center"
-                               Source="{Binding Cancha.ImgURL}"
-                               VerticalOptions="Center"/>
-                    </Frame>
-                </Grid>
-            <ScrollView>
-                <VerticalStackLayout Padding="20" Spacing="15">
-                   
-                    <Label Text="{Binding Cancha.Nombre, StringFormat='Nombre: {0}'}" FontSize="22" FontAttributes="Bold" TextColor="#f1f1f1"/>
-                    <Label Text="{Binding Cancha.Direccion, StringFormat='Direccion: {0}'}" FontSize="16" TextColor="#666666"/>
-                    <Label Text="{Binding Cancha.HoraApertura, StringFormat='Hora Apertura: {0} - '}" FontSize="16" TextColor="#666666"/>
-                    <Label Text="{Binding Cancha.HoraCierre, StringFormat='{0}'}" FontSize="16" TextColor="#666666"/>
-                    <Label Text="{Binding Cancha.Dimensiones, StringFormat='Dimensiones: {0}'}" FontSize="16" TextColor="#666666"/>
-                    <Label Text="{Binding Cancha.Contacto, StringFormat='Contacto: {0}'}" FontSize="16" TextColor="#666666"/>
-                    <Label Text="{Binding Cancha.CapacidadMaxima, StringFormat='Capacidad Maxima: {0}'}" FontSize="16" TextColor="#666666"/>
-                    <Label Text="{Binding Cancha.Precio, StringFormat='Precio: {0}'}" FontSize="16" TextColor="#666666"/>
-                    <Label Text="{Binding Cancha.TipoSuperficie, StringFormat='Tipo de superficie: {0}'}" FontSize="16" TextColor="#666666"/>
-                    <Label Text="{Binding Cancha.Descripcion, StringFormat='Descripcion:{0}'}" FontSize="16" TextColor="#666666"/>
-                    <Button Text="Reservar" Command="{Binding OpenDetailPopupCommand}"
-                       CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}" BackgroundColor="#3d432a" TextColor="White" CornerRadius="20" Margin="4"/>
-                    <Button Text="Ver horarios"        Command="{Binding goToReservasCanchaCommand}"
-CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CanchaDetailsViewModel}}, Path=Cancha}" BackgroundColor="#3d432a" TextColor="White" CornerRadius="20"/>
-                </VerticalStackLayout>
-            </ScrollView>
+                <Label Text="{Binding Cancha.Nombre}" 
+                       FontSize="24" 
+                       Margin="10"
+                       FontAttributes="Bold"
+                       TextColor="#FFFFFF"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Grid.Row="0"/>
+            </Grid>
 
-
+            <!-- Detalles de la cancha -->
+            <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="#252540"  Margin="10">
+                <Label Text="{Binding Cancha.Direccion, StringFormat='📍 {0}'}" FontSize="16" TextColor="#E0E0E0"/>
+                <Label Text="{Binding Cancha.HoraApertura, StringFormat='⏰ {0} - '}" FontSize="16" TextColor="#E0E0E0"/>
+                <Label Text="{Binding Cancha.HoraCierre, StringFormat='{0}'}" FontSize="16" TextColor="#E0E0E0"/>
+                <Label Text="{Binding Cancha.Dimensiones, StringFormat='📐 {0}'}" FontSize="16" TextColor="#E0E0E0"/>
+                <Label Text="{Binding Cancha.CapacidadMaxima, StringFormat='👥 Capacidad: {0}'}" FontSize="16" TextColor="#E0E0E0"/>
+                <Label Text="{Binding Cancha.Precio, StringFormat='💲 {0}'}" FontSize="16" TextColor="#E0E0E0"/>
+                <Label Text="{Binding Cancha.TipoSuperficie, StringFormat='🏟️ Superficie: {0}'}" FontSize="16" TextColor="#E0E0E0"/>
+                <Label Text="{Binding Cancha.Descripcion}" FontSize="14" TextColor="#A0A0A0"/>
             </VerticalStackLayout>
-           
-        </ScrollView>
 
-     
-        
-        
+            <!-- Botones de acción -->
+            <HorizontalStackLayout Spacing="20" Margin="10,20">
+                <Button Text="Reservar" 
+                        Command="{Binding OpenDetailPopupCommand}" 
+                        BackgroundColor="#3C91E6" 
+                        TextColor="#FFFFFF"
+                        FontAttributes="Bold"
+                        CornerRadius="20"
+                        Padding="10,5"/>
+                <Button Text="Horarios" 
+                        Command="{Binding goToReservasCanchaCommand}" 
+                        BackgroundColor="#28A745" 
+                        TextColor="#FFFFFF"
+                        FontAttributes="Bold"
+                        CornerRadius="20"
+                        Padding="10,5"/>
+            </HorizontalStackLayout>
+
+            <!-- Sección de comentarios -->
+            <Label Text="Comentarios" FontSize="20" FontAttributes="Bold" TextColor="#FFFFFF" Margin="10"/>
+            <CollectionView ItemsSource="{Binding Comments}" Margin="10,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="10,5" Padding="10" BackgroundColor="#33334C" >
+                            <VerticalStackLayout>
+                                <Label Text="{Binding usuarios.Nombre}" FontAttributes="Bold" FontSize="14" TextColor="#C1C1C1"/>
+                                <Label Text="{Binding Contenido}" FontSize="14" TextColor="#E0E0E0"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Input para agregar nuevo comentario -->
+            <VerticalStackLayout Margin="10,20" Padding="10" BackgroundColor="#33334C">
+                <material:TextField Title="Escribe un comentario"
+                                    Text="{Binding ComentarioContenido}" 
+                                    TextColor="#FFFFFF"
+                                    WidthRequest="300"
+                                    BackgroundColor="#252540"/>
+                <Button Text="Enviar" Command="{Binding CreateCommentCommand}" 
+                        BackgroundColor="#3C91E6" 
+                        TextColor="#FFFFFF" 
+                        Margin="10,10,10,0" 
+                        FontAttributes="Bold" 
+                        CornerRadius="10"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

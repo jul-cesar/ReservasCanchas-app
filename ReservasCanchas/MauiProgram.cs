@@ -29,7 +29,6 @@ namespace ReservasCanchas
 
                 });
             builder.Services.AddSingleton<CanchasService>();
-            builder.Services.AddSingleton<AuthService>();
 
             builder.Services.AddSingleton<CanchasViewModel>();
             builder.Services.AddSingleton(Connectivity.Current);
@@ -37,7 +36,6 @@ namespace ReservasCanchas
             builder.Services.AddCommunityToolkitDialogs();
             builder.Services.AddMopupsDialogs();
             builder.Services.AddSingleton<LocalDbService>();
-            builder.Services.AddTransient<CanchaDetailsViewModel>();
 
             builder.Services.AddTransient<CanchasView>();
             builder.Services.AddSingleton<Login>();

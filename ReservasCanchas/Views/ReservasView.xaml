@@ -3,48 +3,83 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReservasCanchas.Views.ReservasView"
              Shell.NavBarIsVisible="False"
-            
-             Title="ReservasView">
+             Title="Mis Reservas">
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#3d432a" Offset="0.1" />
-            <GradientStop Color="#222021" Offset="1.0" />
+            <GradientStop Color="#1E1E2C" Offset="0.0" />
+            <GradientStop Color="#252540" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+
     <ScrollView>
-    <StackLayout>
-        <Label Text="Mis Reservas" FontAttributes="Bold" FontSize="Large" TextColor="#f1f1f1" Margin="14" TextDecorations="Underline"/>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Título -->
+            <Label Text="Mis Reservas"
+                   FontAttributes="Bold"
+                   FontSize="12"
+                   TextColor="#FFFFFF"
+                   HorizontalTextAlignment="Center"
+                   Margin="10"
+                   TextDecorations="Underline"/>
 
-
-
-        <CollectionView ItemsSource="{Binding ReservasUser}" 
-                        SelectionMode="None">
+            <!-- Lista de Reservas -->
+            <CollectionView ItemsSource="{Binding ReservasUser}" 
+                            SelectionMode="None">
+                <!-- Vista Vacía -->
                 <CollectionView.EmptyView>
-                    <Label Text="No tienes reservas aun, ve a la seccion de canchas y haz una reserva." Margin="10" Padding="10" FontSize="Body" FontAttributes="Bold"/>
+                    <Label Text="No tienes reservas aún, ve a la sección de canchas y haz una reserva."
+                           TextColor="#A0A0A0"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Margin="10"/>
                 </CollectionView.EmptyView>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame HasShadow="True" Margin="10" Padding="10"
-                           BackgroundColor="#191919" 
-                           BorderColor="#191919"
-                           CornerRadius="10"
-                           IsClippedToBounds="True">
-                        <StackLayout Spacing="5">
-                            <Label Text="{Binding IDReserva, StringFormat='ID Reserva: {0}'}" TextColor="#f1f1f1" FontSize="Medium" FontAttributes="Bold"/>
-                            <Label Text="{Binding FechaCreacion, StringFormat='Fecha de Creación: {0:dd/MM/yyyy - HH:mm}'}" TextColor="#f1f1f1" FontSize="Small"/>
 
-                            <Label Text="{Binding FechaReserva, StringFormat='Fecha de Reserva: {0:dd/MM/yyyy}'}" TextColor="#f1f1f1" FontSize="Small"/>
-                            <Label Text="{Binding HoraInicio, StringFormat='Hora de Inicio: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
-                            <Label Text="{Binding HoraFinalizacion, StringFormat='Hora de Finalización: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
-                            <Label Text="{Binding canchas.Nombre, StringFormat='Cancha: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
-                            <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
-                            <Label Text="{Binding MetodoPago, StringFormat='Método de Pago: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
-                            <Label Text="{Binding MontoPagado, StringFormat='Monto Pagado: {0}'}" TextColor="#f1f1f1" FontSize="Small"/>
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+                <!-- Template de Reservas -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#33334C"
+                               CornerRadius="15"
+                               Padding="15"
+                               Margin="5"
+                               HasShadow="True">
+                            <VerticalStackLayout Spacing="10">
+                                <!-- Detalles de la Reserva -->
+                                <Label Text="{Binding IDReserva, StringFormat='ID Reserva: {0}'}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="#FFFFFF"/>
+                                <Label Text="{Binding FechaCreacion, StringFormat='Fecha de Creación: {0:dd/MM/yyyy - HH:mm}'}"
+                                       FontSize="14"
+                                       TextColor="#E0E0E0"/>
+                                <Label Text="{Binding FechaReserva, StringFormat='Fecha de Reserva: {0:dd/MM/yyyy}'}"
+                                       FontSize="14"
+                                       TextColor="#E0E0E0"/>
+                                <Label Text="{Binding HoraInicio, StringFormat='Hora de Inicio: {0}'}"
+                                       FontSize="14"
+                                       TextColor="#E0E0E0"/>
+                                <Label Text="{Binding HoraFinalizacion, StringFormat='Hora de Finalización: {0}'}"
+                                       FontSize="14"
+                                       TextColor="#E0E0E0"/>
+                                <Label Text="{Binding canchas.Nombre, StringFormat='Cancha: {0}'}"
+                                       FontSize="14"
+                                       TextColor="#E0E0E0"/>
+                                <Label Text="{Binding Estado, StringFormat='Estado: {0}'}"
+                                       FontSize="14"
+                                       TextColor="#E0E0E0"/>
+                                <Label Text="{Binding MetodoPago, StringFormat='Método de Pago: {0}'}"
+                                       FontSize="14"
+                                       TextColor="#E0E0E0"/>
+                                <Label Text="{Binding MontoPagado, StringFormat='Monto Pagado: {0:C}'}"
+                                       FontSize="14"
+                                       TextColor="#E0E0E0"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -112,9 +112,6 @@
 	  <MauiXaml Update="Views\ReservasView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\UserFacturas.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionReservasCanchasHideInfoBar="True" /></VisualStudio></ProjectExtensions>

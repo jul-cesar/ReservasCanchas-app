@@ -9,13 +9,20 @@ using ReservasCanchas.Services;
 using ReservasCanchas.Views;
 namespace ReservasCanchas.ViewModels
 {
+    [QueryProperty(nameof(Cancha), "Cancha")]
+
     public partial class CanchasViewModel : BaseViewModel
 
     {
         CanchasService canchasService;
         IConnectivity connectivity;
         LocalDbService localDb;
-        public ObservableCollection<Cancha> Canchas { get; } = new();
+        [ObservableProperty]
+        public ObservableCollection<Cancha> canchas = new();
+
+        [ObservableProperty]
+        public ObservableCollection<Comentario> comments = new();
+
         public CanchasViewModel(CanchasService canchasService, IConnectivity connectivity, LocalDbService dbl)
 
         {
@@ -31,12 +38,18 @@ namespace ReservasCanchas.ViewModels
         bool isRefreshing;
 
         [ObservableProperty]
+        Cancha cancha;
+
+        [ObservableProperty]
 
         string nombre;
 
         [ObservableProperty]
 
         int currentUserId;
+
+        [ObservableProperty]
+        private string comentarioContenido;
 
         [RelayCommand]
         async Task GoToDetailsAsync(Cancha cancha)
@@ -108,7 +121,7 @@ namespace ReservasCanchas.ViewModels
                     IsBusy = true;
                 }
 
-                var canchas = await canchasService.getCanchas();
+                var canchas = await canchasService.GetCanchasAsync();
                 var favoriteCanchas = await localDb.GetFavoritosAsync(currentUserId);
 
                 if (Canchas.Count != 0)
@@ -153,6 +166,91 @@ namespace ReservasCanchas.ViewModels
             }
         }
 
+        [RelayCommand]
+        private async Task OpenDetailPopup()
+        {
+            Debug.WriteLine("work");
+
+
+            await Shell.Current.GoToAsync($"{nameof(AddReservaView)}", true, new Dictionary<string, object> { { "Cancha", Cancha } });
+
+        }
+
+        [RelayCommand]
+        private async Task goToReservasCancha()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ReservasCancha)}", true, new Dictionary<string, object> { { "Cancha", Cancha } });
+
+        }
+
+        [RelayCommand]
+
+        public async Task GetCommentsCanchaAsync ()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            try
+            {
+                if (connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await Shell.Current.DisplayAlert("Internet error", "Revisa tu conexion a internet e intentalo de nuevo", "ok");
+                    return;
+                }
+                if (!IsRefreshing)
+                {
+                    IsBusy = true;
+                }
+
+                var response  = await canchasService.GetComentariosCanchaAsync(Cancha.IDCancha);
+
+               Comments =  new ObservableCollection<Comentario>(response);
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error", "Error trayendo las canchas", "ok");
+            }
+            finally
+            {
+                IsBusy = false;
+                IsRefreshing = false;
+            }
+        }
+
+        [RelayCommand]
+
+        public async Task CreateComment ()
+        {
+            if(string.IsNullOrEmpty(ComentarioContenido))
+            {
+                await Shell.Current.DisplayAlert("error", "No puedes crear un comentario vacio", "Ok");
+                return ;
+            }
+            try
+            {
+                var newComment = new CrearComentario
+                {
+                    Contenido = ComentarioContenido,
+                    IDCancha = Cancha.IDCancha,
+                    IDUsuario = CurrentUserId,
+                };
+
+                var response = await canchasService.CrearComentarioService(newComment);
+                if(response is not null)
+                {
+                    ComentarioContenido = string.Empty;
+                    await GetCommentsCanchaAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+ 
 
     }
 }

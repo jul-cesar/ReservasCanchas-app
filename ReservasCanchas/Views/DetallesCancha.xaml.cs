@@ -5,16 +5,24 @@ namespace ReservasCanchas;
 public partial class DetallesCancha : ContentPage
 {
 
-    public DetallesCancha(CanchaDetailsViewModel viewModel)
+    public DetallesCancha(CanchasViewModel viewModel)
     {
         InitializeComponent();
 
         BindingContext = viewModel;
 
     }
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+
+    protected override void OnAppearing()
     {
-        base.OnNavigatedTo(args);
+        base.OnAppearing();
+        if (BindingContext is CanchasViewModel viewModel)
+        {
+            if (int.IsPositive(viewModel.Cancha.IDCancha))
+            {
+                viewModel.GetCommentsCanchaCommand.Execute(null);
+            }
+        }
     }
 
 
